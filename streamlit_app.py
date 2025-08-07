@@ -1057,25 +1057,6 @@ def main():
             st.success(f"Title updated to: {new_title}")
             st.rerun()
     
-    # Language selection in chat area
-    st.subheader("🌍 Language Settings")
-    col_lang, col_temp, col_length = st.columns([2, 1, 1])
-    
-    with col_lang:
-        chat_language = st.selectbox(
-            "Response Language:",
-            options=['auto', 'en', 'sw', 'ki', 'luo'],
-            format_func=lambda x: f"{LANGUAGE_CONFIG[x]['flag']} {LANGUAGE_CONFIG[x]['name']}",
-            index=0,
-            key="chat_language"
-        )
-    
-    with col_temp:
-        temperature = st.slider("Creativity", 0.1, 1.0, 0.7, 0.1, key="chat_temp")
-    
-    with col_length:
-        max_length = st.slider("Length", 50, 200, 100, 10, key="chat_length")
-    
     st.markdown("---")
     
     # Display messages or welcome screen

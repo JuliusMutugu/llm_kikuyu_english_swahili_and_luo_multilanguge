@@ -149,7 +149,7 @@ class ConversationEngine:
         }
 
     def detect_language(self, text: str) -> Tuple[str, float]:
-        """Detect the language of input text"""
+        """Enhanced language detection with better accuracy for Kikuyu and English"""
         text_lower = text.lower()
         scores = {}
         
@@ -160,22 +160,84 @@ class ConversationEngine:
             for category, words in patterns.items():
                 for word in words:
                     if word in text_lower:
-                        score += 2  # Higher weight for exact matches
+                        # Give higher weight to exact word matches
+                        if f' {word} ' in f' {text_lower} ' or text_lower.startswith(word) or text_lower.endswith(word):
+                            score += 4
+                        else:
+                            score += 2
                         
-            # Check for language-specific characters
-            if lang == 'kikuyu' and any(char in text for char in 'ĩũẽĩũ'):
-                score += 3
-            elif lang == 'luo' and any(char in text for char in 'ʼ'):
-                score += 3
+            # Enhanced language-specific character detection
+            if lang == 'kikuyu':
+                # Kikuyu specific characters and patterns
+                kikuyu_chars = ['ĩ', 'ũ', 'ũ', 'ĩ', 'ĩa', 'ũa', 'kũ', 'nĩ', 'gũ', 'tũ', 'wĩ']
+                kikuyu_words = ['atĩa', 'nĩkĩ', 'ũngĩ', 'kũrĩa', 'gũtĩ', 'wĩ', 'nũũ']
                 
+                for char in kikuyu_chars:
+                    if char in text:
+                        score += 5
+                
+                for word in kikuyu_words:
+                    if word in text_lower:
+                        score += 6
+                        
+            elif lang == 'luo':
+                # Luo specific characters and patterns
+                luo_chars = ['ʼ', 'ng\'', 'ny', 'dh']
+                luo_words = ['inadi', 'angʼo', 'kanye', 'inyalo', 'kaka', 'mano']
+                
+                for char in luo_chars:
+                    if char in text:
+                        score += 5
+                        
+                for word in luo_words:
+                    if word in text_lower:
+                        score += 6
+                        
+            elif lang == 'kiswahili':
+                # Kiswahili specific patterns
+                swahili_patterns = ['ni', 'na', 'wa', 'ya', 'za', 'la', 'ku', 'mu', 'ki', 'vi']
+                swahili_words = ['habari', 'nini', 'vipi', 'unaweza', 'asante', 'kwaheri']
+                
+                for pattern in swahili_patterns:
+                    if pattern in text_lower:
+                        score += 1
+                        
+                for word in swahili_words:
+                    if word in text_lower:
+                        score += 4
+                        
+            elif lang == 'english':
+                # English specific patterns - common English words that don't appear in other languages
+                english_indicators = ['the', 'and', 'you', 'that', 'this', 'with', 'have', 'will', 'your', 'from', 'they', 'know', 'want', 'been', 'good', 'much', 'some', 'time', 'very', 'when', 'come', 'here', 'just', 'like', 'long', 'make', 'many', 'over', 'such', 'take', 'than', 'them', 'well', 'were']
+                
+                for word in english_indicators:
+                    if f' {word} ' in f' {text_lower} ' or text_lower.startswith(f'{word} ') or text_lower.endswith(f' {word}'):
+                        score += 2
+                
+                # Check for English sentence structure
+                if any(pattern in text_lower for pattern in ['how are', 'what is', 'can you', 'i am', 'do you', 'would you', 'could you']):
+                    score += 5
+                    
             scores[lang] = score / max(total_words, 1)
         
-        # Default to English if no clear detection
-        if not scores or max(scores.values()) < 0.3:
-            return 'english', 0.6
+        # Improved default logic
+        if not scores or max(scores.values()) < 0.1:
+            # If no strong language indicators, check for basic patterns
+            if any(char in text for char in 'ĩũ'):
+                return 'kikuyu', 0.7
+            elif 'ʼ' in text or 'ng\'' in text:
+                return 'luo', 0.7
+            elif any(word in text_lower for word in ['ni', 'na', 'wa', 'habari', 'asante']):
+                return 'kiswahili', 0.7
+            else:
+                return 'english', 0.8  # Default to English with higher confidence
             
         best_lang = max(scores, key=scores.get)
-        confidence = min(scores[best_lang], 1.0)
+        confidence = min(scores[best_lang] * 1.2, 1.0)  # Boost confidence slightly
+        
+        # Ensure minimum confidence levels
+        if confidence < 0.6:
+            confidence = 0.6
         
         return best_lang, confidence
 
@@ -216,39 +278,49 @@ class ConversationEngine:
             
         return 'general'
 
-    def generate_contextual_response(self, text: str, conversation_id: str = None) -> Dict:
-        """Generate a contextual response based on input"""
+    def generate_contextual_response(self, text: str, conversation_id: str = None, target_language: str = None) -> Dict:
+        """Generate a contextual response based on input with optional target language"""
         
         # Generate conversation ID if not provided
         if not conversation_id:
             conversation_id = f"smart_conv_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{random.randint(1000, 9999)}"
         
-        # Detect language
+        # Detect language of input
         detected_lang, confidence = self.detect_language(text)
+        
+        # Determine response language
+        if target_language and target_language != 'auto' and target_language in self.responses:
+            response_lang = target_language
+        else:
+            response_lang = detected_lang
         
         # Categorize input
         category = self.categorize_input(text, detected_lang)
         
-        # Get appropriate responses
-        if detected_lang in self.responses and category in self.responses[detected_lang]:
-            possible_responses = self.responses[detected_lang][category]
+        # Get appropriate responses for the target language
+        if response_lang in self.responses and category in self.responses[response_lang]:
+            possible_responses = self.responses[response_lang][category]
         else:
-            # Fallback to English general responses
-            possible_responses = self.responses['english']['general']
-            detected_lang = 'english'
+            # Fallback to general responses in target language
+            if response_lang in self.responses and 'general' in self.responses[response_lang]:
+                possible_responses = self.responses[response_lang]['general']
+            else:
+                # Final fallback to English
+                possible_responses = self.responses['english']['general']
+                response_lang = 'english'
         
         # Select response (can be made smarter with context)
         response = random.choice(possible_responses)
         
         # Add some context-specific modifications
         if 'name' in text.lower():
-            if detected_lang == 'english':
+            if response_lang == 'english':
                 response += " I'm your multilingual AI assistant, and I'm here whenever you need help!"
-            elif detected_lang == 'kiswahili':
+            elif response_lang == 'kiswahili':
                 response += " Mimi ni msaidizi wako wa AI anayeongea lugha nyingi, niko hapa wakati wowote unahitaji msaada!"
-            elif detected_lang == 'kikuyu':
+            elif response_lang == 'kikuyu':
                 response += " Niĩ ndĩ mũteithĩrĩria waku wa AI ũrĩa ũaraaga rũgano ruingĩ, ndĩ gũkũ rĩrĩa rĩothe ũkabataro ũteithio!"
-            elif detected_lang == 'luo':
+            elif response_lang == 'luo':
                 response += " An jakonygi mar AI mawuoyo gi dhok mongʼeny, an ka sa asaya ma idwaro kony!"
         
         # Store conversation context (for future improvements)
@@ -257,7 +329,8 @@ class ConversationEngine:
         self.conversation_history[conversation_id].append({
             'input': text,
             'response': response,
-            'language': detected_lang,
+            'detected_language': detected_lang,
+            'response_language': response_lang,
             'category': category,
             'timestamp': datetime.now()
         })
@@ -265,6 +338,7 @@ class ConversationEngine:
         return {
             'response': response,
             'language_detected': detected_lang,
+            'response_language': response_lang,
             'confidence': confidence,
             'category': category,
             'tokens_generated': len(response.split()),
@@ -274,9 +348,9 @@ class ConversationEngine:
 # Global instance
 conversation_engine = ConversationEngine()
 
-def generate_smart_response(message: str, conversation_id: str = None) -> Dict:
-    """Main function to generate intelligent responses"""
-    return conversation_engine.generate_contextual_response(message, conversation_id)
+def generate_smart_response(message: str, conversation_id: str = None, target_language: str = None) -> Dict:
+    """Main function to generate intelligent responses with optional target language"""
+    return conversation_engine.generate_contextual_response(message, conversation_id, target_language)
 
 if __name__ == "__main__":
     # Test the conversation engine

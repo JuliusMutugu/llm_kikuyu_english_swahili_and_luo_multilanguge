@@ -184,7 +184,7 @@ class MultiModelSystem:
         # Use smart conversation system as primary method
         if SMART_CONVERSATION_AVAILABLE:
             try:
-                smart_result = generate_smart_response(message, conversation_id)
+                smart_result = generate_smart_response(message, conversation_id, language)
                 
                 # Track conversation
                 self.total_conversations += 1
@@ -194,7 +194,7 @@ class MultiModelSystem:
                     enhanced_result = enhance_response_with_learning(
                         message,
                         smart_result['response'],
-                        smart_result['language_detected'],
+                        smart_result.get('response_language', smart_result['language_detected']),
                         smart_result.get('conversation_id', conversation_id),
                         smart_result['confidence']
                     )
@@ -218,7 +218,7 @@ class MultiModelSystem:
                     response_data = {
                         "response": smart_result['response'],
                         "conversation_id": smart_result.get('conversation_id', conversation_id),
-                        "language_detected": smart_result['language_detected'],
+                        "language_detected": smart_result.get('response_language', smart_result['language_detected']),
                         "confidence": smart_result['confidence'],
                         "tokens_generated": smart_result['tokens_generated'],
                         "model_used": "smart_conversation",
