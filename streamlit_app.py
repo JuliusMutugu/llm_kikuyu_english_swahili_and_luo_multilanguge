@@ -536,10 +536,8 @@ def load_css():
         }
     }
     
-    /* Hide Streamlit branding */
-    #MainMenu {visibility: hidden;}
+    /* Hide Streamlit branding but keep navigation menu */
     footer {visibility: hidden;}
-    header {visibility: hidden;}
     
     /* Custom scrollbar */
     ::-webkit-scrollbar {
