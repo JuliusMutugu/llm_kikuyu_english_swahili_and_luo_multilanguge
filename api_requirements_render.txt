@@ -1,0 +1,15 @@
+# Optimized API requirements for Render free tier
+# Lightweight packages that build quickly and use minimal memory
+
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+requests>=2.31.0
+python-multipart>=0.0.6
+
+# Only essential packages to avoid build timeouts
+python-json-logger>=2.0.4
+
+# Note: Heavy ML libraries like torch/transformers removed
+# API will use intelligent template responses and fallback logic
+# This keeps the deployment under Render's free tier limits

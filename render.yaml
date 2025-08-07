@@ -1,6 +1,18 @@
-# Render deployment configuration
-build:
-  pip install -r api_requirements.txt
-
-start:
-  uvicorn multi_model_api:app --host 0.0.0.0 --port $PORT
+services:
+  - type: web
+    name: trilingual-ai-api
+    env: python
+    buildCommand: pip install -r api_requirements_render.txt
+    startCommand: uvicorn multi_model_api:app --host 0.0.0.0 --port $PORT
+    plan: free
+    healthCheckPath: /health
+    
+  - type: web
+    name: trilingual-ai-ui
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --server.enableCORS false
+    plan: free
+    envVars:
+      - key: API_URL
+        value: https://trilingual-ai-api.onrender.com
