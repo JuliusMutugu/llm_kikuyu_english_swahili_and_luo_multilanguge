@@ -949,16 +949,21 @@ def main():
         user_input = None
     
     # Message input
-    message = st.text_area(
-        "💬 Your message:",
-        value=user_input or "",
-        placeholder=f"Type in {LANGUAGE_CONFIG[selected_language]['name']}...",
-        height=80,
-        key="user_message"
-    )
+    col1, col2 = st.columns([4, 1])
     
-    # Send button
-    send_clicked = st.button("🚀 Send Message", use_container_width=True, type="primary")
+    with col1:
+        message = st.text_area(
+            "💬 Your message:",
+            value=user_input or "",
+            placeholder=f"Type in {LANGUAGE_CONFIG[selected_language]['name']}...",
+            height=80,
+            key="user_message"
+        )
+    
+    with col2:
+        st.write("")  # Add some spacing
+        st.write("")  # Add some spacing
+        send_clicked = st.button("Send", type="primary")
     
     # Handle message sending
     if send_clicked and message.strip():
@@ -973,6 +978,10 @@ def main():
             message,
             timestamp=datetime.datetime.now().strftime("%H:%M")
         )
+        
+        # Clear the text box by deleting the session state key
+        if "user_message" in st.session_state:
+            del st.session_state["user_message"]
         
         # Send to API
         with st.spinner("🤔 AI is thinking..."):
