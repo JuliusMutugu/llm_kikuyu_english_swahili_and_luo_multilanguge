@@ -29,6 +29,15 @@ except ImportError:
     print("Smart conversation system not available")
     SMART_CONVERSATION_AVAILABLE = False
 
+# Import continuous learning system
+try:
+    from continuous_learning import enhance_response_with_learning, learning_system
+    LEARNING_AVAILABLE = True
+    print("✅ Continuous learning system loaded")
+except ImportError:
+    print("Continuous learning system not available")
+    LEARNING_AVAILABLE = False
+
 # Import original model components
 import sys
 sys.path.append('.')
@@ -180,17 +189,42 @@ class MultiModelSystem:
                 # Track conversation
                 self.total_conversations += 1
                 
-                # Format response to match expected structure
-                response_data = {
-                    "response": smart_result['response'],
-                    "conversation_id": smart_result.get('conversation_id', conversation_id),
-                    "language_detected": smart_result['language_detected'],
-                    "confidence": smart_result['confidence'],
-                    "tokens_generated": smart_result['tokens_generated'],
-                    "model_used": "smart_conversation",
-                    "expert_usage": None,
-                    "processing_time": (datetime.datetime.now() - start_time).total_seconds()
-                }
+                # Enhance response with learning if available
+                if LEARNING_AVAILABLE:
+                    enhanced_result = enhance_response_with_learning(
+                        message,
+                        smart_result['response'],
+                        smart_result['language_detected'],
+                        smart_result.get('conversation_id', conversation_id),
+                        smart_result['confidence']
+                    )
+                    
+                    # Format response with learning enhancements
+                    response_data = {
+                        "response": enhanced_result['response'],
+                        "conversation_id": smart_result.get('conversation_id', conversation_id),
+                        "language_detected": smart_result['language_detected'],
+                        "confidence": smart_result['confidence'] + enhanced_result['confidence_boost'],
+                        "tokens_generated": smart_result['tokens_generated'],
+                        "model_used": "smart_conversation_with_learning",
+                        "expert_usage": None,
+                        "processing_time": (datetime.datetime.now() - start_time).total_seconds(),
+                        "learning_applied": enhanced_result['learning_applied'],
+                        "suggestions_used": enhanced_result['suggestions_used'],
+                        "web_knowledge_used": enhanced_result['web_knowledge_used']
+                    }
+                else:
+                    # Format response without learning enhancements
+                    response_data = {
+                        "response": smart_result['response'],
+                        "conversation_id": smart_result.get('conversation_id', conversation_id),
+                        "language_detected": smart_result['language_detected'],
+                        "confidence": smart_result['confidence'],
+                        "tokens_generated": smart_result['tokens_generated'],
+                        "model_used": "smart_conversation",
+                        "expert_usage": None,
+                        "processing_time": (datetime.datetime.now() - start_time).total_seconds()
+                    }
                 
                 return response_data
                 
@@ -387,6 +421,46 @@ def test_models():
             "original_available": model_system.original_model is not None
         }
     }
+
+@app.get("/learning/stats", summary="Get learning system statistics")
+def learning_stats():
+    """Get comprehensive learning system statistics"""
+    if not LEARNING_AVAILABLE:
+        return {"error": "Learning system not available"}
+    
+    try:
+        stats = learning_system.get_learning_stats()
+        return {
+            "learning_system_active": True,
+            "statistics": stats,
+            "capabilities": {
+                "conversation_learning": True,
+                "web_learning": True,
+                "pattern_recognition": True,
+                "knowledge_enhancement": True
+            }
+        }
+    except Exception as e:
+        logger.error(f"Error getting learning stats: {e}")
+        return {"error": f"Failed to get learning statistics: {str(e)}"}
+
+@app.post("/learning/update", summary="Manually update web knowledge")
+def update_web_knowledge(language: str = "english"):
+    """Manually trigger web knowledge update"""
+    if not LEARNING_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Learning system not available")
+    
+    try:
+        count = learning_system.update_web_knowledge(language)
+        return {
+            "success": True,
+            "language": language,
+            "knowledge_items_updated": count,
+            "timestamp": datetime.datetime.now().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Error updating web knowledge: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to update knowledge: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

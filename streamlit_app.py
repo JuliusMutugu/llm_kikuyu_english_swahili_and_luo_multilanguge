@@ -573,7 +573,7 @@ def init_session_state():
     if 'chat_counter' not in st.session_state:
         st.session_state.chat_counter = 0
     if 'sidebar_state' not in st.session_state:
-        st.session_state.sidebar_state = 'chats'  # 'chats' or 'settings'
+        st.session_state.sidebar_state = 'chats'  # 'chats', 'settings', or 'learning'
 
 # Check API status
 @st.cache_data(ttl=10)  # Reduced cache time for faster updates
@@ -802,7 +802,7 @@ def main():
         """, unsafe_allow_html=True)
         
         # Sidebar tabs
-        col_tab1, col_tab2 = st.columns(2)
+        col_tab1, col_tab2, col_tab3 = st.columns(3)
         with col_tab1:
             if st.button("💬 Chats", use_container_width=True, 
                         type="primary" if st.session_state.sidebar_state == 'chats' else "secondary"):
@@ -812,6 +812,11 @@ def main():
             if st.button("⚙️ Settings", use_container_width=True,
                         type="primary" if st.session_state.sidebar_state == 'settings' else "secondary"):
                 st.session_state.sidebar_state = 'settings'
+        
+        with col_tab3:
+            if st.button("🧠 Learning", use_container_width=True,
+                        type="primary" if st.session_state.sidebar_state == 'learning' else "secondary"):
+                st.session_state.sidebar_state = 'learning'
         
         st.markdown("---")
         
@@ -871,28 +876,23 @@ def main():
                 with col4:
                     st.metric("Avg Msgs/Chat", f"{total_messages/len(st.session_state.chats):.1f}")
         
-        else:  # Settings tab
-            # Language selection
-            st.subheader("🌍 Language Settings")
-            selected_language = st.selectbox(
-                "Choose language preference:",
-                options=list(LANGUAGE_CONFIG.keys()),
-                format_func=lambda x: f"{LANGUAGE_CONFIG[x]['flag']} {LANGUAGE_CONFIG[x]['name']}",
-                index=0
-            )
-            
+        elif st.session_state.sidebar_state == 'settings':
             # Model settings
             st.subheader("⚙️ Model Settings")
-            temperature = st.slider("Temperature (creativity)", 0.1, 1.0, 0.7, 0.1)
-            max_length = st.slider("Response length", 50, 200, 100, 10)
+            st.info("Language selection is now available in the main chat area above the message input.")
             
             # Quick examples
             st.subheader("💡 Quick Examples")
-            examples = LANGUAGE_CONFIG[selected_language]['examples']
             
-            for i, example in enumerate(examples):
-                if st.button(f"📝 {example[:30]}...", key=f"example_{i}", use_container_width=True):
-                    st.session_state.example_clicked = example
+            # Show examples for all languages
+            for lang_key, lang_config in LANGUAGE_CONFIG.items():
+                if lang_key != 'auto':  # Skip auto-detect for examples
+                    st.markdown(f"**{lang_config['flag']} {lang_config['name']}:**")
+                    examples = lang_config['examples']
+                    
+                    for i, example in enumerate(examples):
+                        if st.button(f"📝 {example[:40]}...", key=f"example_{lang_key}_{i}", use_container_width=True):
+                            st.session_state.example_clicked = example
             
             # Actions
             st.subheader("🛠️ Actions")
@@ -933,6 +933,110 @@ def main():
                 
                 st.write(f"**Current API URL:** {st.session_state.api_url}")
                 st.write(f"**API Status:** {st.session_state.api_status}")
+        
+        elif st.session_state.sidebar_state == 'learning':
+            # Learning system statistics and controls
+            st.subheader("🧠 Learning System")
+            
+            # Fetch learning statistics
+            try:
+                response = requests.get(f'{st.session_state.api_url}/learning/stats', timeout=5)
+                if response.status_code == 200:
+                    learning_data = response.json()
+                    
+                    if learning_data.get('learning_system_active'):
+                        stats = learning_data['statistics']
+                        
+                        st.success("✅ Learning system is active")
+                        
+                        # Display statistics
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            st.metric("Total Conversations", stats.get('total_conversations', 0))
+                            st.metric("Knowledge Items", stats.get('knowledge_items', 0))
+                        
+                        with col2:
+                            st.metric("Unique Patterns", stats.get('unique_patterns', 0))
+                            
+                        # Language distribution
+                        if stats.get('language_distribution'):
+                            st.subheader("📊 Language Distribution")
+                            lang_dist = stats['language_distribution']
+                            for lang, count in lang_dist.items():
+                                st.write(f"**{lang.title()}:** {count} conversations")
+                        
+                        # Last web updates
+                        if stats.get('last_web_updates'):
+                            st.subheader("🌐 Web Knowledge Updates")
+                            updates = stats['last_web_updates']
+                            for lang, timestamp in updates.items():
+                                st.write(f"**{lang.title()}:** {timestamp}")
+                        
+                        # Manual update controls
+                        st.subheader("🔄 Manual Updates")
+                        update_language = st.selectbox(
+                            "Update knowledge for language:",
+                            options=['english', 'kiswahili'],
+                            format_func=lambda x: x.title()
+                        )
+                        
+                        if st.button("🌐 Update Web Knowledge", use_container_width=True):
+                            with st.spinner(f"Updating {update_language} knowledge..."):
+                                try:
+                                    update_response = requests.post(
+                                        f'{st.session_state.api_url}/learning/update',
+                                        params={'language': update_language},
+                                        timeout=30
+                                    )
+                                    if update_response.status_code == 200:
+                                        result = update_response.json()
+                                        st.success(f"✅ Updated {result['knowledge_items_updated']} knowledge items")
+                                    else:
+                                        st.error(f"❌ Update failed: {update_response.text}")
+                                except Exception as e:
+                                    st.error(f"❌ Error updating knowledge: {str(e)}")
+                        
+                        # Learning capabilities
+                        st.subheader("🎯 Learning Capabilities")
+                        capabilities = learning_data.get('capabilities', {})
+                        for capability, status in capabilities.items():
+                            status_icon = "✅" if status else "❌"
+                            readable_name = capability.replace('_', ' ').title()
+                            st.write(f"{status_icon} {readable_name}")
+                    
+                    else:
+                        st.error("❌ Learning system is not active")
+                        st.write(learning_data.get('error', 'Unknown error'))
+                
+                else:
+                    st.error(f"❌ Failed to fetch learning stats: {response.status_code}")
+            
+            except requests.exceptions.ConnectionError:
+                st.error("❌ Cannot connect to learning API")
+                st.info("Make sure the API server is running with learning support")
+            except Exception as e:
+                st.error(f"❌ Error: {str(e)}")
+            
+            # Learning information
+            st.subheader("ℹ️ About Learning System")
+            st.markdown("""
+            The learning system continuously improves the AI by:
+            
+            **Conversation Learning:**
+            - Analyzes user conversation patterns
+            - Learns from successful interactions
+            - Improves response relevance over time
+            
+            **Web Knowledge:**
+            - Fetches recent information from web sources
+            - Updates knowledge base with current events
+            - Enhances responses with fresh information
+            
+            **Pattern Recognition:**
+            - Identifies common question types
+            - Recognizes language-specific patterns
+            - Adapts to user communication style
+            """)
     
     # Main content area
     active_chat = get_active_chat()
@@ -953,6 +1057,27 @@ def main():
             st.success(f"Title updated to: {new_title}")
             st.rerun()
     
+    # Language selection in chat area
+    st.subheader("🌍 Language Settings")
+    col_lang, col_temp, col_length = st.columns([2, 1, 1])
+    
+    with col_lang:
+        chat_language = st.selectbox(
+            "Response Language:",
+            options=['auto', 'en', 'sw', 'ki', 'luo'],
+            format_func=lambda x: f"{LANGUAGE_CONFIG[x]['flag']} {LANGUAGE_CONFIG[x]['name']}",
+            index=0,
+            key="chat_language"
+        )
+    
+    with col_temp:
+        temperature = st.slider("Creativity", 0.1, 1.0, 0.7, 0.1, key="chat_temp")
+    
+    with col_length:
+        max_length = st.slider("Length", 50, 200, 100, 10, key="chat_length")
+    
+    st.markdown("---")
+    
     # Display messages or welcome screen
     messages = active_chat.get('messages', [])
     
@@ -964,40 +1089,79 @@ def main():
             <div class="welcome-title">Welcome to Multilingual AI</div>
             <div class="welcome-subtitle">
                 Start a conversation in any language. I understand and respond in English, 
-                Kiswahili, Kikuyu, and Luo. Try the examples on the left or type your own message!
+                Kiswahili, Kikuyu, and Luo. Select your preferred language above!
             </div>
         </div>
         """, unsafe_allow_html=True)
     else:
-        # Display chat messages
-        for message in messages:
+        # Display chat messages using proper Streamlit components
+        for i, message in enumerate(messages):
             if message["role"] == "user":
-                st.markdown(f"""
-                <div class="message">
-                    <div class="user-message">
-                        {message["content"]}
-                        <div class="message-meta">
-                            <span>You</span>
-                            <span>{message.get('timestamp', '')}</span>
+                with st.container():
+                    st.markdown(f"""
+                    <div class="message">
+                        <div class="user-message">
+                            {message["content"]}
                         </div>
                     </div>
-                </div>
-                """, unsafe_allow_html=True)
+                    """, unsafe_allow_html=True)
+                    
+                    # Message metadata using Streamlit columns
+                    col_user, col_time = st.columns([3, 1])
+                    with col_user:
+                        st.caption("👤 You")
+                    with col_time:
+                        st.caption(f"🕐 {message.get('timestamp', '')}")
             else:
-                st.markdown(f"""
-                <div class="message">
-                    <div class="assistant-message">
-                        {message["content"]}
-                        <div class="message-meta">
-                            <span>🤖 AI Assistant • {message.get('language', 'Unknown')} • {message.get('confidence', 0):.0%} confidence</span>
-                            <span>{message.get('timestamp', '')} • {message.get('tokens', 0)} tokens</span>
+                with st.container():
+                    st.markdown(f"""
+                    <div class="message">
+                        <div class="assistant-message">
+                            {message["content"]}
                         </div>
                     </div>
-                </div>
-                """, unsafe_allow_html=True)
+                    """, unsafe_allow_html=True)
+                    
+                    # Assistant message metadata using Streamlit columns
+                    col_ai, col_details, col_time = st.columns([2, 2, 1])
+                    with col_ai:
+                        st.caption(f"🤖 AI Assistant")
+                    with col_details:
+                        lang = message.get('language', 'Unknown')
+                        confidence = message.get('confidence', 0)
+                        tokens = message.get('tokens', 0)
+                        st.caption(f"🌍 {lang} • 🎯 {confidence:.0%} • 🎲 {tokens} tokens")
+                    with col_time:
+                        st.caption(f"🕐 {message.get('timestamp', '')}")
+                
+                st.markdown("<br>", unsafe_allow_html=True)
     
     # Input area
     st.markdown("---")
+    
+    # Language selection in main chat area
+    col_lang, col_model = st.columns([2, 2])
+    
+    with col_lang:
+        # Get current chat for language preference
+        active_chat = get_active_chat()
+        current_language = active_chat.get('language', 'auto')
+        
+        selected_language = st.selectbox(
+            "🌐 Chat Language:",
+            options=list(LANGUAGE_CONFIG.keys()),
+            format_func=lambda x: f"{LANGUAGE_CONFIG[x]['flag']} {LANGUAGE_CONFIG[x]['name']}",
+            index=list(LANGUAGE_CONFIG.keys()).index(current_language) if current_language in LANGUAGE_CONFIG else 0,
+            key="chat_language_selector"
+        )
+        
+        # Update chat language preference
+        if selected_language != current_language:
+            active_chat['language'] = selected_language
+    
+    with col_model:
+        # Model settings for this chat
+        temperature = st.slider("🌡️ Creativity", 0.1, 1.0, 0.7, 0.1, key="chat_temperature")
     
     # Check for example click
     if hasattr(st.session_state, 'example_clicked'):
@@ -1040,17 +1204,24 @@ def main():
         # Send to API
         with st.spinner("🤔 Thinking..."):
             try:
-                # Get language and model settings from sidebar
-                selected_language = "english"  # Default
-                temperature = 0.7  # Default
-                max_length = 100  # Default
+                # Convert language selection to API format
+                language_mapping = {
+                    'auto': 'auto',
+                    'en': 'english',
+                    'sw': 'kiswahili',
+                    'ki': 'kikuyu',
+                    'luo': 'luo'
+                }
+                
+                # Use the chat-level language selection
+                api_language = language_mapping.get(selected_language, 'auto')
                 
                 response = requests.post(f'{st.session_state.api_url}/chat', 
                     json={
                         "message": message,
-                        "language": selected_language,
+                        "language": api_language,
                         "conversation_id": active_chat.get('conversation_id'),
-                        "max_length": max_length,
+                        "max_length": 100,  # Default max length
                         "temperature": temperature
                     },
                     timeout=30
@@ -1062,6 +1233,8 @@ def main():
                     # Update conversation ID if needed
                     if data.get('conversation_id'):
                         active_chat['conversation_id'] = data['conversation_id']
+                        # Update total tokens
+                        active_chat['total_tokens'] += data.get('tokens_generated', 0)
                     
                     # Add assistant response to active chat
                     add_message_to_chat(
