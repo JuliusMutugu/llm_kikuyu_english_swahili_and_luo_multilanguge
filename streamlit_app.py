@@ -996,9 +996,16 @@ def main():
     col1, col2 = st.columns([4, 1])
     
     with col1:
+        # Ensure user_input is clean text (no HTML)
+        clean_input = ""
+        if user_input:
+            # Remove any HTML tags and clean the text
+            import re
+            clean_input = re.sub(r'<[^>]+>', '', str(user_input)).strip()
+        
         message = st.text_area(
             "💬 Your message:",
-            value=user_input or "",
+            value=clean_input,
             placeholder=f"Type in {LANGUAGE_CONFIG[selected_language]['name']}...",
             height=80,
             key="user_message"
