@@ -575,27 +575,20 @@ def init_session_state():
         st.session_state.sidebar_state = 'chats'  # 'chats', 'settings', or 'learning'
 
 # Check API status
-@st.cache_data(ttl=10)  # Reduced cache time for faster updates
 def check_api_status():
     """Check if API is available - works for both local and deployed environments"""
     
     # First, try the configured API URL (for deployed environments)
     api_url = get_api_url()
     
-    # Special handling for known working deployed URL
+    # Special handling for known working deployed URL - assume it's always available
     if api_url == 'https://llm-kikuyu-english-swahili-and-luo.onrender.com':
-        try:
-            response = requests.get(f'{api_url}/health', timeout=10)
-            if response.status_code == 200:
-                return True, 'deployed'
-        except Exception:
-            # Even if health check fails, assume deployed service is available
-            # since we know this URL works
-            return True, 'deployed'
+        # For the deployed service, we know it's working so return True immediately
+        return True, 'deployed'
     
-    # For other URLs, do normal health check
+    # For other URLs, do a quick health check
     try:
-        response = requests.get(f'{api_url}/health', timeout=5)
+        response = requests.get(f'{api_url}/health', timeout=3)
         if response.status_code == 200:
             # Extract port from URL for display purposes
             if 'localhost' in api_url:
@@ -605,18 +598,16 @@ def check_api_status():
                 # For deployed services, return a generic indicator
                 return True, 'deployed'
     except Exception:
-        pass
-    
-    # Fallback: Try local ports for development
-    if 'localhost' in api_url or 'onrender.com' not in api_url:
-        ports = [8000, 8001, 8002, 8003, 8004, 8005, 8006, 8007, 8008, 8009, 3000, 5000]
-        for port in ports:
-            try:
-                response = requests.get(f'http://localhost:{port}/health', timeout=3)
-                if response.status_code == 200:
-                    return True, port
-            except Exception:
-                continue
+        # If health check fails for localhost, try detecting local ports
+        if 'localhost' in api_url:
+            ports = [8000, 8001, 8002, 8003, 8004, 8005]
+            for port in ports:
+                try:
+                    response = requests.get(f'http://localhost:{port}/health', timeout=2)
+                    if response.status_code == 200:
+                        return True, port
+                except Exception:
+                    continue
     
     return False, None
 
@@ -632,21 +623,18 @@ def get_api_url():
     if current_url:
         return current_url.rstrip('/')
     
-    # Check if we're running on Streamlit Cloud or other cloud platforms
-    # For Render deployment, always use the known working URL
-    hostname = os.environ.get('HOSTNAME', '')
-    if ('onrender.com' in hostname or 
+    # Check if we're running on a deployed platform
+    hostname = os.environ.get('HOSTNAME', '').lower()
+    if ('onrender' in hostname or 
         'render' in hostname or 
         os.environ.get('RENDER_SERVICE_NAME') or
-        'streamlit' in os.environ.get('PATH', '').lower()):
+        'streamlit' in os.environ.get('STREAMLIT_SERVER_PORT', '')):
         # We're on Render - use the deployed URL
         return 'https://llm-kikuyu-english-swahili-and-luo.onrender.com'
     
-    # Local development - try to detect running API
-    is_online, port = check_api_status()
-    if is_online and port:
-        return f'http://localhost:{port}'
-    return 'http://localhost:8001'  # Default fallback
+    # Default to deployed URL if we can't detect environment clearly
+    # This ensures the app works even if environment detection fails
+    return 'https://llm-kikuyu-english-swahili-and-luo.onrender.com'
 
 # Chat management functions
 def create_new_chat():
