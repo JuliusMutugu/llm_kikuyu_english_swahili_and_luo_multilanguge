@@ -596,6 +596,16 @@ def get_api_url():
     if api_url:
         return api_url.rstrip('/')
     
+    # Check if we're running on Render (combined service)
+    current_url = os.environ.get('RENDER_EXTERNAL_URL')
+    if current_url:
+        return current_url.rstrip('/')
+    
+    # Check if we're running on Streamlit Cloud or other cloud platforms
+    if os.environ.get('STREAMLIT_SHARING_MODE') or 'onrender.com' in os.environ.get('HOSTNAME', ''):
+        # Use same domain for API in combined deployment
+        return 'https://llm-kikuyu-english-swahili-and-luo.onrender.com'
+    
     # Local development - try to detect running API
     is_online, port = check_api_status()
     if is_online and port:
