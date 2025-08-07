@@ -577,16 +577,34 @@ def init_session_state():
 # Check API status
 @st.cache_data(ttl=10)  # Reduced cache time for faster updates
 def check_api_status():
-    # Try multiple ports where the API might be running (expanded range)
-    ports = [8000, 8001, 8002, 8003, 8004, 8005, 8006, 8007, 8008, 8009, 3000, 5000]
-    for port in ports:
-        try:
-            response = requests.get(f'http://localhost:{port}/health', timeout=3)
-            if response.status_code == 200:
+    """Check if API is available - works for both local and deployed environments"""
+    
+    # First, try the configured API URL (for deployed environments)
+    api_url = get_api_url()
+    try:
+        response = requests.get(f'{api_url}/health', timeout=5)
+        if response.status_code == 200:
+            # Extract port from URL for display purposes
+            if 'localhost' in api_url:
+                port = api_url.split(':')[-1] if ':' in api_url else '8000'
                 return True, port
-        except Exception as e:
-            # Silently continue to next port
-            continue
+            else:
+                # For deployed services, return a generic indicator
+                return True, 'deployed'
+    except Exception:
+        pass
+    
+    # Fallback: Try local ports for development
+    if 'localhost' in api_url or 'onrender.com' not in api_url:
+        ports = [8000, 8001, 8002, 8003, 8004, 8005, 8006, 8007, 8008, 8009, 3000, 5000]
+        for port in ports:
+            try:
+                response = requests.get(f'http://localhost:{port}/health', timeout=3)
+                if response.status_code == 200:
+                    return True, port
+            except Exception:
+                continue
+    
     return False, None
 
 def get_api_url():
@@ -810,9 +828,14 @@ def main():
     with st.sidebar:
         # API Status
         if api_online:
-            st.success(f"✅ API Online (Port {api_port})")
+            if api_port == 'deployed':
+                st.success("✅ API Online (Deployed)")
+            else:
+                st.success(f"✅ API Online (Port {api_port})")
         else:
             st.error("❌ API Offline")
+            # Show current API URL for debugging
+            st.caption(f"Checking: {st.session_state.api_url}")
         
         st.markdown("---")
         
