@@ -1,0 +1,6 @@
+# Render deployment configuration
+build:
+  pip install -r api_requirements.txt
+
+start:
+  uvicorn multi_model_api:app --host 0.0.0.0 --port $PORT

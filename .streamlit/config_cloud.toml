@@ -1,0 +1,11 @@
+# Streamlit Cloud configuration
+[server]
+port = 8501
+headless = true
+address = "0.0.0.0"
+
+[browser]
+gatherUsageStats = false
+
+[global]
+developmentMode = false

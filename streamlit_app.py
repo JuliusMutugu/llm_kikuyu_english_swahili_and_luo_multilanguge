@@ -9,6 +9,7 @@ import requests
 import json
 import time
 import datetime
+import os
 from pathlib import Path
 import base64
 from typing import Dict, List, Optional
@@ -590,6 +591,12 @@ def check_api_status():
 
 def get_api_url():
     """Get the correct API URL"""
+    # Check for environment variable (for cloud deployment)
+    api_url = os.environ.get('API_URL')
+    if api_url:
+        return api_url.rstrip('/')
+    
+    # Local development - try to detect running API
     is_online, port = check_api_status()
     if is_online and port:
         return f'http://localhost:{port}'

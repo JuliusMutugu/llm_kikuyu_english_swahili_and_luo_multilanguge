@@ -1,0 +1,12 @@
+# Railway deployment configuration
+[build]
+builder = "nixpacks"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "always"
+
+[variables]
+PYTHONPATH = "/app"
+PORT = "8001"

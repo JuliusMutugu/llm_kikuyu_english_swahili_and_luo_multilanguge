@@ -1,0 +1,19 @@
+# Lightweight API Server Requirements for Free Hosting
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+python-multipart>=0.0.6
+requests>=2.31.0
+
+# Core dependencies (lightweight versions)
+torch>=2.0.0,<2.1.0
+transformers>=4.35.0,<4.36.0
+tokenizers>=0.15.0
+numpy>=1.24.0,<1.25.0
+
+# Optional - only install if models are available
+# accelerate>=0.24.0
+# datasets>=2.14.0
+
+# Logging
+python-json-logger>=2.0.4
