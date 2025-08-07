@@ -1,0 +1,23 @@
+2025-08-07 12:21:03,499 - __main__ - INFO - Using device: cpu
+2025-08-07 12:21:03,500 - __main__ - INFO - No trained model found, creating fresh model...
+2025-08-07 12:21:03,500 - __main__ - INFO - Tokenizer initialized with 83 tokens
+2025-08-07 12:21:23,662 - __main__ - INFO - Model loaded with 616,147 parameters
+2025-08-07 12:23:30,122 - __main__ - INFO - Chat request processed in 35.51s, 58 tokens generated
+2025-08-07 12:28:09,191 - __main__ - INFO - Using device: cpu
+2025-08-07 12:28:09,191 - __main__ - INFO - Loading trained model...
+2025-08-07 12:28:09,716 - __main__ - INFO - Tokenizer initialized with 83 tokens
+2025-08-07 12:28:10,682 - __main__ - INFO - Tokenizer initialized with 83 tokens
+2025-08-07 12:28:10,721 - __main__ - INFO - Model loaded with 616,147 parameters
+2025-08-07 12:28:54,035 - __main__ - INFO - Chat request processed in 0.56s, 100 tokens generated
+2025-08-07 12:58:38,774 - __main__ - INFO - Chat request processed in 0.06s, 6 tokens generated
+2025-08-07 12:58:58,654 - __main__ - INFO - Chat request processed in 0.02s, 3 tokens generated
+2025-08-07 12:59:20,277 - __main__ - INFO - Chat request processed in 0.50s, 100 tokens generated
+2025-08-07 13:15:03,585 - __main__ - INFO - Chat request processed in 0.70s, 100 tokens generated
+2025-08-07 13:22:35,515 - __main__ - INFO - Chat request processed in 0.54s, 100 tokens generated
+2025-08-07 14:16:03,267 - __main__ - INFO - Chat request processed in 0.36s, 45 tokens generated
+2025-08-07 14:30:07,454 - __main__ - INFO - Chat request processed in 0.10s, 15 tokens generated
+2025-08-07 15:05:56,600 - __main__ - INFO - Using device: cpu
+2025-08-07 15:05:56,601 - __main__ - INFO - Loading trained model...
+2025-08-07 15:05:56,726 - __main__ - INFO - Tokenizer initialized with 83 tokens
+2025-08-07 15:05:56,929 - __main__ - INFO - Tokenizer initialized with 83 tokens
+2025-08-07 15:05:56,949 - __main__ - INFO - Model loaded with 616,147 parameters

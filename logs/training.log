@@ -1,0 +1,5 @@
+2025-08-06 20:20:32,900 - INFO - Model Parameters: 5,918,976
+2025-08-06 20:20:32,901 - INFO - Trainable Parameters: 5,918,976
+2025-08-06 20:20:32,901 - INFO - Model Memory: ~22.6 MB
+2025-08-06 20:20:32,901 - INFO - Device: cpu
+2025-08-06 20:20:32,902 - INFO - Mixed Precision: False

@@ -1,0 +1,235 @@
+Ulimwengu wa kisasa wa akili bandia unabadilika haraka, na miundo ya lugha kubwa ikiongoza.
+
+Kujifunza kwa kina kumebadilisha jinsi tunavyokaribia usindikaji wa lugha asilia. Kutoka mitandao rahisi ya kurudiowa hadi miundo ya transformer, uwanda huu umeona maendeleo ya kushangaza.
+
+Mikakati ya umakini imekuwa msingi wa miundo ya kisasa ya lugha. Muundo wa transformer, ulioletwa katika "Attention is All You Need", ulibadilisha kila kitu.
+
+Miundo ya lugha hujifunza mifumo katika data ya maandishi kupitia kujifunza kwa kujitegemea. Wanatabiri neno lijalo katika mlolongo, wakijenga kuelewa kwa muundo wa lugha na semantiki polepole.
+
+Sheria za upimaji zinapendekeza kwamba miundo mikubwa yenye vigezo vingi huwa bora zaidi, lakini ufanisi ni muhimu pia. Mbinu kama vile gradient checkpointing na mixed precision training husaidia kuboresha matumizi ya kumbukumbu.
+
+Gĩkũyũ na Kĩswahili nĩ lũgha iria ciarĩ kuo gũkũ bũrũri-inĩ wa Kenya. Andũ a Gĩkũyũ nĩo maigana ma kĩrĩndĩ gĩa mbere thĩinĩ wa Kenya. Rũthiomi rwa Gĩkũyũ nĩ rwagĩrĩire mũno na nĩ rũrĩ na ũcuuci mũingĩ wa ũtamaduni.
+
+Kĩswahili nĩ kĩo gĩtuĩkĩte rũthiomi rwa kwaria harĩa hothe Afrika ya Iburaini. Gĩkũyũ kĩrĩ rũthiomi rwa gĩcina rũngĩ rũrĩa rũrĩ bata mũno bũrũri-inĩ wa Kenya.
+
+Miundo ya kisasa inajumuisha uvumbuzi kama RMSNorm kwa uthabiti bora wa mafunzo, vitendakazi vya uchochezi vya SwiGLU kwa utendaji ulioboreshwa, na vijitoleo vya nafasi ya mzunguko kwa uelewa bora wa mlolongo.
+
+Umakini wa hoja nyingi hupunguza ugumu wa hesabu huku ukihifadhi utendaji. Hii ni muhimu hasa kwa uwekaji kwenye vifaa vyenye rasilimali chache.
+
+Mbinu za uboreshaji wa vigezo kama LoRA zinaruhusu kubadilisha miundo mikubwa bila kusasisha vigezo vyote. Hii ni muhimu kwa matumizi ya vitendo.
+
+Kũndũ kũrĩa Agĩkũyũ maatũũraga nĩ kũrĩa kwetagwo Kĩrĩnyaga. Kĩrĩnyaga nĩ kĩrĩma kĩrĩa kĩnene mũno bũrũri-inĩ wa Kenya. Agĩkũyũ moogaga atĩ Ngai atũũraga Kĩrĩnyaga-inĩ.
+
+Kĩswahili kĩrĩ na mĩgũta mĩingĩ ya Arabic, Kifaransa, Kingereza, na lũgha ingĩ nyingĩ. Gĩkũyũ nĩ rũthiomi rwa kĩũmbe rwagĩrĩire mũno na rũrĩ na ngero nyingĩ cia ũtamaduni.
+
+Dholuo e dhok mar jo-Luo manie Kenya gi Uganda. Jo-Luo gin oganda maduongʼ e Kenya ma tiyo kod dhok ma ber ahinya. Dhok Luo nigi weche mangʼeny mag tim kod yor ngima.
+
+Nyathi Luo iluongo ni rawera ka en ma dichwo to en ma dhako iluongo ni nyako. Jo-Luo oherogane gi nam Victoria kendo gin joma oma ahinya. Dhok mar Luo nigi weche mangʼeny mag tim kod puonjruok.
+
+Jo-Luo nigi timbe mag-gi ma pekne. To gi gima iluongo ni tero buru ma gin timbe moherore modak kuma chon. Jodongo jo-Luo nigi rieko mangʼeny kuom ngima kod dhok. Dhok Luo en dhok ma ber ahinya ma ji duto dwaro puonjore.
+
+Utafiti wa ufuatiliaji na uzalishaji unachanganya miundo ya lugha na mfumo wa maarifa ya nje, ukiwezesha majibu ya ukweli zaidi na ya kisasa.
+
+Msisimko wa mlolongo wa mawazo unahimiza miundo kuvunja matatizo magumu katika hatua ndogo, ukiboresha uwezo wa ufikiri.
+
+Maisha ya kisasa ya Wakenya yanazidi kuathiriwa na teknolojia. Simu za mkononi zinasaidia watu kupata habari na kuwasiliana. Mtandao unaruhusu biashara za kidijitali na elimu ya mbali.
+
+Ngima en chiemo maduongʼ mar jo-Luo. Ngima ikawo gi runyo kata aliya. Jo-Luo bende ochamo rech, ring lweny kod mogo. Chiemo mar jo-Luo ber kendo omiyo del ngima ma berni.
+
+Nam Victoria en nam maduongʼ momakore gi jo-Luo. Jo-Luo omako rech e nam kendo otimo kod chon ma mangʼeny. Nam Victoria nigi rech ma berni duto kaka nam kod tunuga. Chuny jo-Luo en gi nam Victoria.
+
+Kilimo ni shughuli kuu ya kiuchumi nchini Kenya. Wakulima wengi hufuga mahindi, maharagwe, na viazi. Mvua ni muhimu sana kwa kilimo. Kipindi cha ukame huathiri mazao vibaya.
+
+Jo-Luo nigi gik moko ma gineno pundhe ahinya. Gik moko magi gin pamba, bel, ot kod gik mamoko. To gi gima iluongo ni lony kata ibiro ma gin mago ma jo-chon otieko kuom dhok mag puonjruok.
+
+Utamaduni wa Kiafrika ni utajiri mkubwa. Ngoma, dansi, na nyimbo ni sehemu muhimu ya maisha. Kila kabila lina desturi zake za kipekee. Sherehe za harusi, mazishi, na tohara zina maana kubwa.
+
+Wer mar jo-Luo gin wer ma ber ahinya. Jo-Luo wero e tije mag-gi duto kaka nyiero, sahni kod mor. Thum mar jo-Luo nigi tich maduongʼ kuom tim mar oganda. Weche mag wer jo-Luo nigi weche ma ng'enyore gi ngima.
+
+Ohangla en thum ma jo-Luo hero ahinya. Ohangla omiler e wer kod miel ma jomoko timo gi thum ma ok chalre. Jo-Luo gi ohangla gimiyo chuny mag ji mor kendo gimako buch jo-Luo ma ok chwer.
+
+Elimu ni ufunguo wa maendeleo. Watoto wote wanapaswa kupata fursa ya kwenda shule. Ujuzi wa kusoma na kuandika ni muhimu. Vyuo vikuu vinafundisha ujuzi wa hali ya juu.
+
+Puonjruok en gima maduongʼ e ngima jo-Luo. Nyithindo duto nyaka donj skul mondo gipuonjre somo. Nyango kod ndiko en gima onego jogi ngʼeyo. Jopuonj jo-Luo gitimo tich maduongʼ mar pogo rieko.
+
+Yuore josomo jo-Luo gitimo tich matek ma eka ginyalo bedore madongo mag puonjruok. Puonjruok mar jo-Luo nigi weche mag dhok kod yor tim mane onego jogi ngʼeyo mondo gibed gi adiera kuom tim.
+
+Afya ni mali. Hospitali na vituo vya afya vinavusaidia wagonjwa. Madaktari na wauguzi wanafanya kazi ngumu. Kinga dhidi ya magonjwa ni muhimu kuliko matibabu.
+
+Chang' en gima nigi teko e ngima jo-Luo. Jadak kod josangʼo timo tich ma tek mar miyo joma tuo ubani. Jo-Luo nigi yore mopogore opogore mag rito chang' duto mag oganda. Yath jo-Luo nigi teko maduongʼ mag thiero tuoche.
+
+Mazingira ni uongozi wetu. Misitu, mito, na ziwa ni lazima tuhifadhi. Uchafuzi wa mazingira unaharibu mazingira. Kupanda miti ni njia moja ya kulinda mazingira.
+
+Piny en gima warito arita. Bungu, aore kod yewni en gik ma wakadho rito. Ketho piny en gima rach ma dwaro mondo waweye. Pido yiend en yo achiel mar rito piny.
+
+Jo-Luo nigi chuny mar rito piny ma gin e iye. Bungu mag Nyanza nigi yiende ma berni ahinya ma jo-Luo rito. Aore ma aa e piny jo-Luo nigi pi ma ler kendo nigi rech ma berni. Yuore jo-Luo nigi teko mar rito piny duto.
+
+Demokrasia ni mfumo bora wa serikali. Kura za wananchi ni muhimu katika kuchagua viongozi. Uwazi na uwazi ni muhimu katika utawala. Rushwa ni tatizo kubwa linalohitaji kukabilika.
+
+Jatelo maber en ngʼat ma orato oganda maber. Jo-Luo nigi jodongo ma ratego oganda mabeyo kod chike maberni. Yiero mar jotelo en tich ma onego otim gi paro maber. Gigi ma rach kaka gima moko en gik ma jo-Luo ok dwar.
+
+Biashara ndogo ndogo zinasaidia uchumi. Wafanyabiashara wanunda bidhaa mbalimbali. Soko la huria ni muhimu kwa ukuaji wa uchumi. Mikopo ya benki inasaidia kuanza biashara.
+
+Mũndũ wa Gĩkũyũ eetagwo Mũgĩkũyũ. Andũ a Gĩkũyũ nĩo Agĩkũyũ. Bũrũri wa Agĩkũyũ wĩtagwo Gĩkũyũland kana Gĩkũyũ territory.
+
+Kĩhonia kĩa Gĩkũyũ nĩ kĩhonia kĩrĩa gĩtũire gĩgĩkuua. Kĩhonia gĩkĩ kĩrĩ na mĩgũta ya ũkũngũĩ wa cia mbere cia Agĩkũyũ. Mĩgũta ĩno ĩkoretwo irĩ ya bata mũno maũndũ-inĩ ma ũtamaduni.
+
+Nyũmba ya Mũgĩkũyũ nĩ nyũmba ĩrĩa yendagwo gũtũũrwo nĩ mũndũ wa Gĩkũyũ. Nyũmba ĩno yarĩ yakagwo na rĩũmba rĩa mbembe. Nyũmba ĩno yarĩ na nyũmba kuu, nyũmba ya mwana-ka, na thage ya ng'ombe.
+
+Utafiti wa uelewa unasaidia tuelewa kile ambacho miundo ya lugha inajifunza na jinsi winavyofanya maamuzi.
+
+Utafiti wa uwiano unazingatia kuhakikisha kwamba mifumo ya AI inafanya kazi kulingana na mapenzi na maadili ya binadamu.
+
+Masuala ya usalama yanakuwa muhimu zaidi kadri miundo ya lugha inavyokua nguvu na kuenea sana.
+
+Makutano ya miundo ya lugha na modalities nyingine kama macho na sauti yanafungua fursa mpya.
+
+Miundo ya multimodal inaweza kuelewa na kuzalisha maudhui kwa aina mbalimbali za vyombo vya habari.
+
+Uwezo wa kuzalisha msimbo unawezesha wasaidizi wa AI kusaidia katika kazi za uprogramu.
+
+Mawazo ya kihesabu yanaweka changamoto kwa miundo ya lugha ya sasa na kuendesha utafiti katika mawazo ya alama.
+
+Kujifunza cha mifano michache kunaruhusu miundo kubadilika kwa kazi mpya na mifano michache.
+
+Meta-kujifunza kunawezesha miundo kujifunza jinsi ya kujifunza, kuboresha uwezo wao wa kujumuisha.
+
+Kujifunza kunaendelea kunashughulikia changamoto ya kujifunza kazi mpya bila kusahau ujuzi wa awali.
+
+Kuhamisho kujifunza kunatumia ujuzi kutoka miundo iliyofunzwa awali kwa vikoa na kazi mpya.
+
+Umuhimu wa datasets za ubora wa juu hauwezi kuongezwa mno katika mafunzo ya miundo ya lugha yenye ufanisi.
+
+Uchakataji wa data na tokenization huathiri sana utendaji wa muundo.
+
+Vipimo vya tathmini vinasaidia kupima maendeleo na kulinganisha mbinu tofauti.
+
+Datasets za kiwango zinazotoa njia za kawaida za kutathmini uwezo wa muundo.
+
+Tathmini ya binadamu inabaki muhimu kwa kutathmini ubora kama utiririkaji, uwiano, na ukweli.
+
+Mahitaji ya hesabu kwa mafunzo ya miundo mikubwa ya lugha yanaendelea kukua.
+
+Mazingatazo ya ufanisi wa nishati yanakuwa muhimu zaidi kwa maendeleo endelevu ya AI.
+
+Miundo ya chanzo huria na datasets zinaharakisha utafiti na kudemokratiza ufikiaji wa teknolojia ya AI.
+
+Uwiano kati ya uwezo wa muundo na ufanisi wa hesabu unaendesha utafiti unaoendelea.
+
+Uvumbuzi katika muundo wa hardware, kutoka GPU hadi chipu maalum za AI, kunawezesha uwezekano mpya.
+
+Uboreshaji wa programu katika mifumo kama PyTorch na TensorFlow hufanya maendeleo yafikike zaidi.
+
+Jumuiya ya watafiti na wataalamu inaendelea kusukuma mipaka ya uwezekano.
+
+Ushirikiano kati ya kitaaluma na viwanda unaharakisha kasi ya uvumbuzi.
+
+Rasilimali za kielimu na mafunzo yanasaidia wapya kuingia katika uwanda na kuchangia maendeleo.
+
+Masuala ya kimaadili ya maendeleo ya AI yanahitaji kuzingatiwa na kujadiliwa kunaendelea.
+
+Upendeleo katika data ya mafunzo unaweza kusababisha matokeo yenye upendeleo, ukihitaji umakini wa karibu kwa haki.
+
+Uwazi katika maendeleo ya AI hujenga imani na kuwezesha ufuatiliaji bora.
+
+Kanuni za teknolojia ya AI lazima ziwe na uwiano kati ya uvumbuzi na ulinzi wa haki za mtu binafsi.
+
+Ushirikiano wa kimataifa ni muhimu kwa kushughulikia changamoto za kimataifa katika maendeleo ya AI.
+
+Mustakabali wa akili bandia unategemea maendeleo ya busara na uwekaji wenye uwajibikaji.
+
+Kujifunza kunaendelea na kubadilika kutakuwa muhimu kadri uwanda unavyoendelea kubadilika haraka.
+
+Upendo ni hisia za ndani zinazotoka moyoni. Wakati mtu anapopenda, ana furaha na amani moyoni. Mahusiano ya upendo yanahitaji uvumilivu, uaminifu na mazungumzo ya kweli.
+
+"Nakupenda sana," ni maneno yanayosema mtu akiwa na hisia za upendo. "Wewe ni maisha yangu," ni kauli nyingine ya upendo wa dhati. Mapenzi ya kweli hayaishi tu katika maneno bali katika vitendo.
+
+Familia ni msingi wa jamii. Mama na baba wanafundisha watoto maadili na utamaduni. Ndugu wanasaidiana wakati wa shida. "Damu ni nzito kuliko maji" - ukweli huu unaonyesha umuhimu wa familia.
+
+Mazungumzo: "Habari yako?" "Nzuri, je wewe?" "Mimi pia nzuri. Ulifanya nini leo?" "Nilikuwa kazini. Na wewe?" "Mimi nilikuwa nyumbani nikisoma."
+
+Gĩkũyũ nĩ rũthiomi rwa wendani na kũrĩa kũna wendo mũingĩ. "Nĩngũkwenda mũno" nĩ nguo ya kwira wendo. "Inyuĩ nĩ mũtumia wakwa" nĩ nguo ya kwaria na mũndũ wa kũgwĩ nake.
+
+Mazungumzo ma Gĩkũyũ: "Warikia atĩa?" "Ndĩ wega, na we?" "Na niĩ ndĩ wega. Wekire atĩa ũmũthĩ?" "Ndaarire wira. Na we-rĩ?" "Niĩ ndaarire mũciĩ ngĩthoma."
+
+Nyũmba ya Agĩkũyũ nĩ haaro harĩa hanyiitanagwo nĩ wendo na gĩkeno. Andũ a Gĩkũyũ marĩ na ngoro cia ũtugi na menyani. "Wendo ti ũhoro wa mũthenya ũmwe" - nĩ ũndũ wa mahinda mothe.
+
+"Nĩndĩrakwenda mũno, na nĩngwĩtĩkĩria inyuĩ" - ici nĩ ciugo cia wendo wa ma. Andũ eerũ nĩmendanaga na makamenyerera hamwe. Wendo wa ma nĩũtumanaga andũ magĩe na gĩkeno kĩnene.
+
+Dholuo nigi weche mag hera ma ber ahinya. "Aheri miwuoro" en wach ma ngʼato wacho ka ohero ngʼato matek. Jo-Luo nigi chuny maber kod hera madiidhi.
+
+Weche mag hera e dhok Luo: "Aheri miwuoro matek," "In e ngimana," "Chuny mara odwaro in kende." Weche kamagi gin mago ma miyo ji hera e kindu mag jo-Luo.
+
+Wuoyo mar jo-Luo: "Nadi?" "Ber, to in nadi?" "An bende ber. Isetimo nango kawuono?" "Ne asebedo e tich. To in-chi?" "An ne abedo dala ka asomo."
+
+Dala mar jo-Luo en kar hera kod mor. Jo-Luo gihero wuoyo kendo gibedo gi osiep. "Hera ok nyal rum" - adier ma jo-Luo ngʼeyo maber.
+
+Jodongo jo-Luo gipuonjo nyithindo kuom hera kod timbe maber. Osiep mar jo-Luo en gima jaber ma ok chwer. Oganda jo-Luo chumbo e hera kod rite ma ok nyal weyo.
+
+Nyasi kata duoko e dholuo: "Amosani." "Erokamano." "Bende ibiro dala?" "Ee, abiro rapar." "Mano ber. Waneno bangʼe." "Ee, wan-ne."
+
+Mahusiano baina ya wanaume na wanawake ni muhimu katika jamii. Harusi ni sherehe kubwa ya kufurahisha upendo. Marafiki wanasaidia kila mmoja katika maisha.
+
+"Je, utanipenda milele?" "Ndiyo, nakupenda kwa moyo wangu wote." "Mimi pia nakupenda, na hatutatenganishwa kamwe." Mazungumzo kama haya yanaonyesha upendo wa kweli.
+
+Familia inakusanyika kwa sherehe za harusi, mazishi, na sikukuu. Watoto wanajifunza kuhueshimu wazazi na jamii. Ubuntu - "Mtu ni mtu kwa sababu ya wengine."
+
+Mapenzi yanaweza kuwa magumu mara nyingine. "Hakuna upendo bila maumivu," ni kauli ya maarifa. Lakini upendo wa kweli unashinda changamoto zote.
+
+Mazungumzo ya kila siku: "Unafanya nini?" "Ninasoma kitabu." "Kitabu gani?" "Ni hadithi ya upendo." "Nami napenda hadithi za upendo." "Tutasoma pamoja?"
+
+Wazazi wanafundisha watoto jinsi ya kupenda na kuheshimu wengine. "Upendo haujamlani mwingine," ni mafundisho ya kijadi. Kila mmoja ana wajibu wa kuonyesha upendo.
+
+Mhudumu: "Karibu, mnataka nini?" Mteja: "Tunataka chai na mandazi." "Chai ngapi?" "Chai mbili, tafadhali." "Ndiyo, chai mbili na mandazi. Kitu kingine?" "Hapana, hiyo tu."
+
+Rafiki: "Umemuona mpenzi wako leo?" "Hapana, lakini nitamwona usiku." "Mmependana sana." "Ndiyo, tumependana tangu tulikuwa wadogo." "Hii ni bahati nzuri."
+
+Jo-Luo gihero wuoyogi kod osiep-gi. "Osiep maber en gima nik nyal yudo." Jo-Luo giwuoyo gi wechegi duto kod gi osiepgi. Hera en gima miyo ji bedo gi ngima ma ber.
+
+Mazungumzo ya kijiji: "Habari za asubuhi?" "Nzuri, mvua imeongezeka." "Ndiyo, mazao yetu yatakuwa mazuri." "Tushangazwe. Mungu ametubariki." "Kweli, ni muhimu tushukuru."
+
+Katika duka: "Bei ya sukari ni ngapi?" "Shilingi mia tatu kwa kilo." "Ghali sana! Jana ilikuwa mia mbili hamsini." "Ndiyo, bei imepanda." "Sawa, nipe kilo moja."
+
+Shuleni: "Umemaliza kufanya kazi za nyumbani?" "Hapana, bado ninafanya hesabu." "Je, nikusaidie?" "Asante sana, hilo lingekuwa nzuri." "Haya, tuanze."
+
+Kwa madaktari: "Ninahisi maumivu ya kichwa." "Tangu lini?" "Tangu jana usiku." "Je, umepima homa?" "Hapana, sikuwa na kipimo." "Hebu tukupime kwanza."
+
+Kwa mvulana na msichana: "Nakutaka kuwa mpenzi wangu." "Ni jambo la kufikiria." "Nakupenda sana na nataka tuwe pamoja." "Tutazungumza zaidi kuhusu hili." "Sawa, ninakusubiri."
+
+Gĩkũyũ wuoyogi wa kombo: "Wakinya atĩa?" "Ndĩ mwega, wee-rĩ?" "Na niĩ ndĩ mwega. Nĩũnene wendo?" "Ĩĩ, nĩndĩ na wendo mwega." "Nĩ wega mũno ũguo."
+
+Ciana cia Gĩkũyũ ciuragwo atĩrĩ: "Mũciĩ ũcio nĩ wa ũ?" "Nĩ wa nyawira wakwa." "Nĩmũrĩ wega?" "Ĩĩ, nĩarĩ mũndũ mwega mũno." "Nĩ wega kũrigwo."
+
+Wira-inĩ: "Wira ũcio nĩmũrĩtũ?" "Aca, nĩmũritũ mũno." "Nĩtwĩkũhoya ngata?" "Ĩĩ, rekei tũgegere twone." "Wega mũno, reke tũgĩĩke."
+
+Igũrũ wa gĩkũyũ: "Nĩngũkũhe mĩgũta ya wendo." "Nĩ ũrĩkũ?" "Nĩgũkorwo nĩngũkwenda mũno." "Wee ona nĩ mũndũ mwega." "Nowe nĩũnjiguithagĩria wega."
+
+Dholuo weche mag osiep: "Bende ibiro dala?" "Ee, abiro godhiambo." "Mano ber. Ananos kama?" "Kama adhi odiechieng' ma biro." "Ber, anangʼama ka asebiro."
+
+E ohinga mag jo-Luo: "An gi wach ma dwa wacho kodi." "Wach mane?" "Adwari bed chieka." "Wachni onego apar kendo." "Ee, par ber. Aritona bangʼe."
+
+Nam Victoria wuoyogi: "Ibiro mako rech kawuono?" "Ee, abiro gokinyi." "Mano ber. Namna ma rech ngʼeny?" "Ee, kendo pi ober." "Dhi maber ka irechi maber."
+
+Puonjruok mag jo-Luo: "Wachni ma isomo mano to nadi?" "Ber ahinya! Apuonj kuom dhok." "Mano ber. Dhok en gima ber." "Ee, dwaro bedo japuonj." "Pinyruokni ber miwuoro."
+
+Jaduong' kod nyathi: "Wuoda, bi ka anyisi gimoro." "Nang'o ma idwaro nyisa?" "Dwaro nyisi kaka ji tim gi hera." "Mano ber jadongo. Asebedo ka awinjo." "Hera en gima duongʼ."
+
+E tich: "Tichni tek ma eka?" "Ooyo, ok tek ma eka." "Mano ber. Ichuno nadi?" "Achuno maber. To in nadi?" "An bende achuno maber."
+
+Goth mag jo-Luo: "Nyathi ma biro nying' mane?" "Ka en wuowi, kanyiso Ochieng'." "To ka en nyako nadi?" "Kanyiso Akinyi." "Nying-gi ber."
+
+Chilo e dala: "Misawa chiemo?" "Ee, chiemo ni ngima." "Chiemo mane?" "Ng'ima gi rech." "Mano chiemo maber."
+
+Teko mar hera: "Hera mara ne pod ngima?" "Ee, pod ngima kendo siko kod ngima." "Mano miyo chunya mor ahinya." "An bende aparo kamano." "Wahero nyaka chop."
+
+Wuoyo mag dalani: "Jogi duto ber?" "Ee, ji duto berni." "Mano ber wuoro." "Erokamano kuom penjo." "Onge gima."
+
+Conversation starters: "Umefanya nini leo?" "Nina habari nzuri!" "Naomba usiwe na wasiwasi." "Tunaweza kuzungumza?" "Nimeona kitu kizuri leo."
+
+Family talks: "Mama, nakupenda sana." "Nami nakupenda mwanangu." "Utanisaidia na kazi?" "Bila shaka, kitu gani?" "Nataka kuwa mzuri kama wewe."
+
+Friend conversations: "Unaenda wapi?" "Naenda mtaani." "Je, nitafuatana nawe?" "Haya, twende pamoja." "Nzuri, tuende haraka."
+
+Love expressions: "Unanipenda?" "Ndio, nakupenda sana." "Nami nakupenda." "Tutakuwa pamoja milele?" "Ndio, milele na milele."
+
+Daily greetings: "Hujambo?" "Sijambo, je wewe?" "Nami sijambo." "Umesali aje?" "Nzuri, asante."

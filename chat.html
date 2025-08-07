@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilingual AI Assistant</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --bg-tertiary: #16213e;
+            --bg-chat: #0f0f23;
+
+            --text-primary: #ffffff;
+            --text-secondary: #b4b4b4;
+            --text-accent: #667eea;
+
+            --border-color: #2a2a3e;
+            --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+            --border-radius: 16px;
+            --border-radius-small: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            height: 100vh;
+            background: var(--bg-primary);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: var(--border-radius-small);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(67, 233, 123, 0.1);
+            border: 1px solid rgba(67, 233, 123, 0.3);
+            border-radius: 20px;
+            font-size: 12px;
+            color: #43e97b;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #43e97b;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Language Selection */
+        .language-section {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-dropdown {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-small);
+            color: var(--text-primary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .language-dropdown:hover {
+            border-color: var(--text-accent);
+        }
+
+        .language-flags {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .flag-button {
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-small);
+            color: var(--text-secondary);
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .flag-button:hover,
+        .flag-button.active {
+            background: var(--text-accent);
+            color: white;
+            border-color: var(--text-accent);
+        }
+
+        /* Quick Examples */
+        .examples-section {
+            padding: 24px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .example-item {
+            padding: 12px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-small);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 13px;
+        }
+
+        .example-item:hover {
+            background: var(--text-accent);
+            border-color: var(--text-accent);
+            transform: translateY(-1px);
+        }
+
+        .example-lang {
+            font-size: 10px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        /* Main Chat Area */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background: var(--bg-chat);
+        }
+
+        .chat-header {
+            padding: 24px 32px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-title h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .chat-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-button {
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-small);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .action-button:hover {
+            background: var(--text-accent);
+            color: white;
+            border-color: var(--text-accent);
+        }
+
+        /* Messages Area */
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .message {
+            display: flex;
+            gap: 16px;
+            max-width: 80%;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: var(--secondary-gradient);
+        }
+
+        .message.bot .message-avatar {
+            background: var(--primary-gradient);
+        }
+
+        .message-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 16px 20px;
+            position: relative;
+            max-width: 100%;
+        }
+
+        .message.user .message-content {
+            background: var(--text-accent);
+            border-color: var(--text-accent);
+            color: white;
+        }
+
+        .message-text {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .message-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        .message.user .message-meta {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--text-accent);
+            border-radius: 50%;
+            animation: typingDots 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0s;
+        }
+
+        @keyframes typingDots {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Input Area */
+        .input-container {
+            padding: 24px 32px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .input-field {
+            flex: 1;
+            min-height: 52px;
+            max-height: 120px;
+            padding: 16px 20px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 26px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            resize: none;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .input-field:focus {
+            border-color: var(--text-accent);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .send-button {
+            width: 52px;
+            height: 52px;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .send-button:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-light);
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Welcome Message */
+        .welcome-message {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .welcome-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 24px;
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .welcome-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .language-badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .language-badge {
+            padding: 8px 16px;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--text-accent);
+        }
+
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .quick-action {
+            padding: 12px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-small);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .quick-action:hover {
+            background: var(--text-accent);
+            border-color: var(--text-accent);
+            transform: translateY(-2px);
+        }
+
+        /* Error States */
+        .error-message {
+            padding: 16px 20px;
+            background: rgba(245, 87, 108, 0.1);
+            border: 1px solid rgba(245, 87, 108, 0.3);
+            border-radius: var(--border-radius-small);
+            color: #f5576c;
+            margin: 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .app-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .chat-header {
+                padding: 16px 20px;
+            }
+
+            .messages-container {
+                padding: 20px;
+            }
+
+            .input-container {
+                padding: 16px 20px;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="logo-text">TriLingual AI</div>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span>AI Assistant Online</span>
+                </div>
+            </div>
+
+            <div class="language-section">
+                <div class="section-title">Language Selection</div>
+                <div class="language-selector">
+                    <select id="languageSelect" class="language-dropdown">
+                        <option value="auto">Auto-detect Language</option>
+                        <option value="en">English</option>
+                        <option value="sw">Kiswahili</option>
+                        <option value="ki">Kikuyu</option>
+                        <option value="luo">Luo</option>
+                    </select>
+                </div>
+
+                <div class="language-flags">
+                    <div class="flag-button active" data-lang="auto" onclick="setLanguage('auto')">
+                        <i class="fas fa-globe"></i>
+                        Auto
+                    </div>
+                    <div class="flag-button" data-lang="en" onclick="setLanguage('en')">
+                        �� EN
+                    </div>
+                    <div class="flag-button" data-lang="sw" onclick="setLanguage('sw')">
+                        🇰🇪 SW
+                    </div>
+                    <div class="flag-button" data-lang="ki" onclick="setLanguage('ki')">
+                        🇰🇪 KI
+                    </div>
+                    <div class="flag-button" data-lang="luo" onclick="setLanguage('luo')">
+                        🇰🇪 LUO
+                    </div>
+                </div>
+            </div>
+
+            <div class="examples-section">
+                <div class="section-title">Quick Examples</div>
+
+                <div class="example-item" onclick="sendExample('Hello, how are you today?')">
+                    <div class="example-lang">English</div>
+                    <div>Hello, how are you today?</div>
+                </div>
+
+                <div class="example-item" onclick="sendExample('Habari yako? Hujambo?')">
+                    <div class="example-lang">Kiswahili</div>
+                    <div>Habari yako? Hujambo?</div>
+                </div>
+
+                <div class="example-item" onclick="sendExample('Wĩ atĩa? Nĩ ũguo mwega?')">
+                    <div class="example-lang">Kikuyu</div>
+                    <div>Wĩ atĩa? Nĩ ũguo mwega?</div>
+                </div>
+
+                <div class="example-item" onclick="sendExample('Inadi? Imiyau nade?')">
+                    <div class="example-lang">Luo</div>
+                    <div>Inadi? Imiyau nade?</div>
+                </div>
+
+                <div class="example-item" onclick="sendExample('Nakupenda sana wewe')">
+                    <div class="example-lang">Love - Kiswahili</div>
+                    <div>Nakupenda sana wewe</div>
+                </div>
+
+                <div class="example-item" onclick="sendExample('Nĩngũkwenda mũno')">
+                    <div class="example-lang">Love - Kikuyu</div>
+                    <div>Nĩngũkwenda mũno</div>
+                </div>
+
+                <div class="example-item" onclick="sendExample('Aheri miwuoro matek')">
+                    <div class="example-lang">Love - Luo</div>
+                    <div>Aheri miwuoro matek</div>
+                </div>
+
+                <div class="example-item" onclick="sendExample('Can you tell me a story?')">
+                    <div class="example-lang">Conversation</div>
+                    <div>Can you tell me a story?</div>
+                </div>
+
+                <div class="example-item" onclick="sendExample('Niambie hadithi nzuri')">
+                    <div class="example-lang">Story - Kiswahili</div>
+                    <div>Niambie hadithi nzuri</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <div>
+                        <h1>Trilingual AI Assistant</h1>
+                        <div class="chat-subtitle">Powered by Modern Language Models • Swahili • Kikuyu • Luo</div>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <button class="action-button" onclick="clearChat()">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                    <button class="action-button" onclick="exportChat()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                    <button class="action-button" onclick="toggleSettings()">
+                        <i class="fas fa-cog"></i> Settings
+                    </button>
+                </div>
+            </div>
+
+            <div class="messages-container" id="messagesContainer">
+                <div class="welcome-message" id="welcomeMessage">
+                    <div class="welcome-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h2 class="welcome-title">Welcome to Trilingual AI</h2>
+                    <p class="welcome-subtitle">
+                        Your intelligent assistant that speaks English, Kiswahili, Kikuyu, and Luo.
+                        Start a conversation in any language, and I'll respond naturally!
+                    </p>
+
+                    <div class="language-badges">
+                        <span class="language-badge">🇺🇸 English</span>
+                        <span class="language-badge">🇰🇪 Kiswahili</span>
+                        <span class="language-badge">🇰🇪 Kikuyu</span>
+                        <span class="language-badge">🇰🇪 Luo</span>
+                    </div>
+
+                    <div class="quick-actions">
+                        <button class="quick-action" onclick="sendExample('Hello! How can you help me today?')">
+                            Start in English
+                        </button>
+                        <button class="quick-action" onclick="sendExample('Habari! Unaweza kunisaidia?')">
+                            Anza kwa Kiswahili
+                        </button>
+                        <button class="quick-action" onclick="sendExample('Wĩ mwega! Ũngĩndeithagia atĩa?')">
+                            Amba na Kikuyu
+                        </button>
+                        <button class="quick-action" onclick="sendExample('Inadi! Inyalo konya nadi?')">
+                            Chakruok gi Luo
+                        </button>
+                    </div>
+                </div>
+
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea id="messageInput" class="input-field"
+                        placeholder="Type your message in any language... (English, Kiswahili, Kikuyu, Luo)" rows="1"
+                        onkeypress="handleKeyPress(event)"></textarea>
+                    <button id="sendButton" class="send-button" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        let conversationId = null;
+        let messagesContainer;
+        let welcomeMessage;
+        let currentLanguage = 'auto';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function () {
+            messagesContainer = document.getElementById('messagesContainer');
+            welcomeMessage = document.getElementById('welcomeMessage');
+
+            // Auto-resize textarea
+            const textarea = document.getElementById('messageInput');
+            textarea.addEventListener('input', autoResize);
+
+            // Focus on input
+            textarea.focus();
+        });
+
+        function autoResize() {
+            const textarea = document.getElementById('messageInput');
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            document.getElementById('languageSelect').value = lang;
+
+            // Update flag buttons
+            document.querySelectorAll('.flag-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+        }
+
+        function sendExample(text) {
+            const textarea = document.getElementById('messageInput');
+            textarea.value = text;
+            autoResize();
+            textarea.focus();
+
+            // Optionally send immediately
+            setTimeout(() => sendMessage(), 100);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function addMessage(content, isUser, language = '', confidence = 0, tokens = 0) {
+            // Hide welcome message on first interaction
+            if (welcomeMessage && welcomeMessage.style.display !== 'none') {
+                welcomeMessage.style.display = 'none';
+            }
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.innerHTML = isUser ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
+
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+
+            const messageText = document.createElement('div');
+            messageText.className = 'message-text';
+            messageText.textContent = content;
+
+            const messageMeta = document.createElement('div');
+            messageMeta.className = 'message-meta';
+
+            if (isUser) {
+                const timeItem = document.createElement('div');
+                timeItem.className = 'meta-item';
+                timeItem.innerHTML = `<i class="fas fa-clock"></i> ${new Date().toLocaleTimeString()}`;
+                messageMeta.appendChild(timeItem);
+            } else {
+                if (language) {
+                    const langItem = document.createElement('div');
+                    langItem.className = 'meta-item';
+                    langItem.innerHTML = `<i class="fas fa-language"></i> ${language}`;
+                    messageMeta.appendChild(langItem);
+                }
+
+                if (confidence > 0) {
+                    const confItem = document.createElement('div');
+                    confItem.className = 'meta-item';
+                    confItem.innerHTML = `<i class="fas fa-chart-line"></i> ${(confidence * 100).toFixed(0)}% confident`;
+                    messageMeta.appendChild(confItem);
+                }
+
+                if (tokens > 0) {
+                    const tokenItem = document.createElement('div');
+                    tokenItem.className = 'meta-item';
+                    tokenItem.innerHTML = `<i class="fas fa-microchip"></i> ${tokens} tokens`;
+                    messageMeta.appendChild(tokenItem);
+                }
+
+                const timeItem = document.createElement('div');
+                timeItem.className = 'meta-item';
+                timeItem.innerHTML = `<i class="fas fa-clock"></i> ${new Date().toLocaleTimeString()}`;
+                messageMeta.appendChild(timeItem);
+            }
+
+            messageContent.appendChild(messageText);
+            messageContent.appendChild(messageMeta);
+
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(messageContent);
+
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTyping() {
+            document.getElementById('typingIndicator').style.display = 'flex';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTyping() {
+            document.getElementById('typingIndicator').style.display = 'none';
+        }
+
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+            messagesContainer.appendChild(errorDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function clearChat() {
+            // Clear all messages except welcome
+            const messages = messagesContainer.querySelectorAll('.message, .error-message');
+            messages.forEach(msg => msg.remove());
+
+            // Show welcome message again
+            if (welcomeMessage) {
+                welcomeMessage.style.display = 'block';
+            }
+
+            // Reset conversation
+            conversationId = null;
+        }
+
+        function exportChat() {
+            const messages = [];
+            messagesContainer.querySelectorAll('.message').forEach(msg => {
+                const isUser = msg.classList.contains('user');
+                const text = msg.querySelector('.message-text').textContent;
+                const time = msg.querySelector('.meta-item .fa-clock').parentElement.textContent.replace(/.*?(\d+:\d+:\d+).*/, '$1');
+
+                messages.push({
+                    type: isUser ? 'user' : 'assistant',
+                    message: text,
+                    time: time
+                });
+            });
+
+            const exportData = {
+                timestamp: new Date().toISOString(),
+                language: currentLanguage,
+                messages: messages
+            };
+
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `trilingual-chat-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function toggleSettings() {
+            alert('Settings panel coming soon! 🚀\n\nPlanned features:\n• Temperature control\n• Response length\n• Language preferences\n• Theme selection');
+        }
+
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const sendButton = document.getElementById('sendButton');
+
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            // Disable input
+            messageInput.disabled = true;
+            sendButton.disabled = true;
+            sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+            // Add user message
+            addMessage(message, true);
+
+            // Clear input
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+
+            // Show typing indicator
+            showTyping();
+
+            try {
+                const response = await fetch(`${API_BASE}/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        language: currentLanguage,
+                        conversation_id: conversationId,
+                        max_length: 100,
+                        temperature: 0.7
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                // Update conversation ID
+                conversationId = data.conversation_id;
+
+                // Add bot response
+                addMessage(
+                    data.response,
+                    false,
+                    data.language_detected,
+                    data.confidence,
+                    data.tokens_generated
+                );
+
+            } catch (error) {
+                console.error('Chat error:', error);
+                showError(`Failed to get response. Is the API server running? (${error.message})`);
+            } finally {
+                // Hide typing and re-enable input
+                hideTyping();
+                messageInput.disabled = false;
+                sendButton.disabled = false;
+                sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
+                messageInput.focus();
+            }
+        }
+    </script>
+</body>
+
+</html>

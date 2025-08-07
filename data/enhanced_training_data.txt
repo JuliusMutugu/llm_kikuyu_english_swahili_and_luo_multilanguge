@@ -1,0 +1,248 @@
+# Enhanced Trilingual Dataset for Better Training
+# Much larger, more comprehensive dataset with cultural context
+
+# Basic Greetings and Responses
+Hello, how are you today? I hope you are doing well and feeling happy.
+Habari yako leo? Natumai uko mzuri na unajisikia furaha.
+Wĩ atĩa ũmũthĩ? Nĩndĩramaini ũrĩ mwega na ũracanjamũka.
+Inadi kawuono? Ageno ni ber kendo inyalo bedo gi mor.
+
+Good morning! It's a beautiful day and I'm excited to talk with you.
+Habari za asubuhi! Ni siku nzuri na nimefurahia kuongea nawe.
+Rũciinĩ rũega! Nĩ mũthenya mwega na nĩnjanjamũkĩte nĩ kũgwĩra nawe.
+Okinyi maber! En odiechieng maber kendo amor gi wuoyo kodi.
+
+How has your day been so far? I hope everything is going well for you.
+Siku yako imekuwaje hadi sasa? Natumai kila kitu kinaenda vizuri.
+Mũthenya waku ũtuĩkĩte atĩa nginya rĩu? Ndĩramaini maũndũ mothe megũthiĩ wega.
+Odiechieng mari osebedo nadi nyaka koro? Ageno ni gik moko duto dhi maber.
+
+# Love and Romantic Expressions
+I love you with all my heart. You are the most important person in my life.
+Nakupenda kwa moyo wangu wote. Wewe ni mtu muhimu zaidi katika maisha yangu.
+Nĩngũkwenda na ngoro yakwa yothe. Wee nĩwe mũndũ wa bata mũno muoyo-inĩ wakwa.
+Aheri gi chunya duto. In e ngʼat mamuombo moloyo e ngimana.
+
+You make me so happy every single day. I cannot imagine life without you.
+Unanipatia furaha kila siku. Siwezi kufikiria maisha bila yako.
+Ũrandũnyaga o mũthenya. Ndingĩhota kwiiciira muoyo tiga wee.
+Imiyo mor pile ka pile. Ok anyal paro ngima ma ionge kodi.
+
+When I see your smile, my heart fills with joy and everything feels perfect.
+Wakati ninaona tabasamu yako, moyo wangu umejaa furaha na kila kitu kinashoneka kamili.
+Rĩrĩa nyona kĩnyũ gĩaku, ngoro yakwa ĩiyũraga gĩkeno na ũndũ wothe wonekaga mwega.
+Ka aneno nyimieri to chunya opongʼ gi mor kendo gimoro amora nenore maber.
+
+# Family and Relationships
+My family means everything to me. We support each other through good times and difficult moments.
+Familia yangu inamaanisha kila kitu kwangu. Tunaunga mkono kila mmoja wakati mzuri na magumu.
+Nyũmba yakwa nĩ kĩndũ gĩothe harĩ niĩ. Twĩteithagia mahinda mega na ma mathĩĩna.
+Jooda en gima duto ne an. Wakonyore e kinde maber kod matek.
+
+I have wonderful children who bring so much love and laughter into our home.
+Nina watoto wazuri ambao wanaleta upendo na kicheko katika nyumba yetu.
+Ndĩ na ciana njega iria cirehaga wendo na theko nyũmba-inĩ yaitũ.
+An gi nyithindo maber ma kelo hera kod nyiero e dalawa.
+
+My parents taught me important values about life, love, and respect for others.
+Wazazi wangu walinifundisha maadili muhimu kuhusu maisha, upendo, na heshima kwa wengine.
+Aciari akwa maarutire maũndũ ma bata mũno ũhoro wa muoyo, wendo, na gũtĩĩa andũ angĩ.
+Joma nywola puonja gik mabeyo kuom ngima, hera, kod luoro jo-mamoko.
+
+# Daily Life and Activities
+This morning I woke up early and went to the market to buy fresh vegetables.
+Asubuhi hii niliamka mapema na kwenda sokoni kununua mboga za ufresh.
+Rũciinĩ rũyũ ndarokĩrire na ngĩthiĩ ithũa kũgũra nyeni njeru.
+Okinyi mani nachiewo mapile ma adhi chiro mondo angʼiew nyangile manyien.
+
+I enjoy cooking traditional food for my family, especially on special occasions.
+Napenda kupika chakula cha jadi kwa familia yangu, haswa wakati wa sherehe maalum.
+Njanjagĩraga kũruga irio cia tene nĩ ũndũ wa nyũmba yakwa, makĩria hĩndĩ cia magĩa ma bata.
+Amor tedo chiemo mar kwerewa ne jooda, moloyo e kinde mag timo.
+
+After work, I like to spend time with my friends and share stories about our day.
+Baada ya kazi, napenda kutumia wakati na marafiki zangu na kushiriki hadithi za siku yetu.
+Thuutha wa wĩra, nyendaga gũikara na arata akwa na tũheane ngano cia mũthenya witũ.
+Bangʼ tich, amor bedo gi joma osiepwa kendo wapo weche mag odiechiengwa.
+
+# Weather and Environment
+The rainy season has begun and everything is becoming green and beautiful.
+Kipindi cha mvua kimeanza na kila kitu kinazidi kuwa kijani na kizuri.
+Kĩmera kĩa mbura nĩkĩambĩrĩire na ũndũ wothe ũrĩĩkuha kũruru na kũthaka.
+Kinde mar koth osechako kendo gimoro amora bedo raum kod ber.
+
+I love watching the sunrise in the morning, it fills me with hope and energy.
+Napenda kuona mawio ya jua asubuhi, inanijaliza tumaini na nguvu.
+Njagĩagwo nĩ kuona riũa rĩgĩũka rũciinĩ, nĩrĩnjiyũragĩa mwĩhoko na hinya.
+Amor neno wangʼ chiengʼ gokinyi, omiya geno kod teko.
+
+The birds are singing beautifully today, their songs make me feel peaceful.
+Ndege wanaimba vizuri leo, nyimbo zao zinanifanya nihisi amani.
+Nyoni irĩĩinaga o wega ũmũthĩ, rwĩmbo rwacio rũratũma njĩkagĩrĩre thayũ.
+Winyo wer maber kawuono, wende miyo abed gi kwe.
+
+# Education and Learning
+Learning new languages opens doors to understanding different cultures and people.
+Kujifunza lugha mpya kunafungua milango ya kuelewa utamaduni na watu wa aina tofauti.
+Kũmenya lũthiomi rũngĩ gũkingũragĩra kũmenya mĩtugo na andũ a mĩthemba ĩngĩ.
+Puonjore dhok manyien yawo dhol mar ngʼeyo timbe kod ji mopogore.
+
+Children should have access to quality education in their mother tongue.
+Watoto wanapaswa kupata elimu bora katika lugha yao ya mama.
+Ciana ikĩagĩrĩire kũgĩa na gũthoma kũrĩa gwega na rũthiomi rwacio rwa gĩkua.
+Nyithindo onego bed gi puonjruok maber e dhogi ma minyolo.
+
+# Traditional Culture and Values
+Our ancestors passed down wisdom through stories, songs, and traditions.
+Mababu zetu walipitisha busara kupitia hadithi, nyimbo, na desturi.
+Maithe maitũ maatuĩtire ũũgĩ na ũndũ wa ngano, nyĩmbo, na mĩtugo.
+Kwerewa nochiwo rieko gi sigendni, wende kod timbe.
+
+Traditional music and dance are important ways to celebrate our heritage.
+Muziki na ngoma za jadi ni njia muhimu za kusherehekea urithi wetu.
+Rwĩmbo na ngũcũ cia tene nĩ njĩra cia bata ya gũcanjamũka ũhoro wa maithe maitũ.
+Wende kod miel ma chon gin yore mabeyo mar paro kuom gima kwerewa noweyo.
+
+# Food and Cooking
+Today I prepared ugali with vegetables and meat for my family's dinner.
+Leo nimeandaa ugali na mboga na nyama kwa chakula cha jioni cha familia yangu.
+Ũmũthĩ ndaarugĩte mũgĩmbi na nyeni na nyama nĩ ũndũ wa irio cia hwainĩ cia nyũmba yakwa.
+Kawuono atedo kuon gi alode kod ring ne chakruok mar dal odiechieng.
+
+My grandmother taught me how to prepare traditional dishes with local ingredients.
+Nyawira yangu alinifunza jinsi ya kuandaa vyakula vya kienyeji kwa viungo vya mitaani.
+Cucu akwa aarutire ũrĩa wa kũruga irio cia gĩkũyũ na indo cia kũu gweto.
+Datga nopuonja kaka tedo chiemo mar ngʼatowa gi gik ma onyale e gwengwa.
+
+The aroma of home-cooked food brings back wonderful memories of childhood.
+Harufu ya chakula cha nyumbani inaleta kumbukumbu nzuri za utoto.
+Mwĩrĩro wa irio iria irugagwo mũciĩ wacookagĩria kiririkano njega cia ũciari.
+Wen mar chiemo ma tedi dalani duogo paro maber mag ndalo ma pod otin.
+
+# Conversations and Social Interactions
+Let's sit together and share what has been happening in our lives recently.
+Hebu tuketi pamoja na tushiriki kile kilichotokea katika maisha yetu hivi karibuni.
+Nĩtwikare hamwe na twĩheane ũrĩa kuoĩka muoyo-inĩ waitũ o ro rĩu.
+Wabed piny kanyakla mondo wapo gik motimore e ngimawa sani.
+
+I always enjoy our conversations because you have such interesting perspectives.
+Daima ninafurahia mazungumzo yetu kwa sababu una maoni ya kupendeza sana.
+Ndiagĩagwo nĩ mĩario yaitũ nĩ ũndũ ũkoragwo ũrĩ na meciiria ma kũgegaga.
+Aheruok wuoyowa moseko nikech in gi paro mabeyo ahinya.
+
+Thank you for listening to me and giving such thoughtful advice.
+Asante kwa kunisikiliza na kutoa ushauri wenye maana.
+Nĩngũgũcookeria ngaatho nĩ kũnjigua na kũũrĩa wa kũgaanĩrwo wega.
+Erokamano nikech iwinjo wachna kendo imiyo rieko maber.
+
+# Work and Professional Life
+I work hard to provide for my family and contribute to my community.
+Ninafanya kazi kwa bidii kulipa familia yangu na kuchangia jamii yangu.
+Ndũthomaga na hinya nĩgeetha ndũteithagie nyũmba yakwa na gũteithagia bũrũri.
+Atiyo matek mondo akonyre jooda kendo akonyeuru gwengwa.
+
+Teamwork and cooperation are essential for achieving our common goals.
+Kazi ya kikundi na ushirikiano ni muhimu kufanikisha malengo yetu ya pamoja.
+Wĩra wa gũcookania na kũrutanĩra nĩ kĩndũ kĩa bata nĩgeetha tũhingie ũrĩa tweriragĩria hamwe.
+Tich mar riwruok kod konyruok en gima mamuombo niyud gik ma wadwaro kaachiel.
+
+Success comes from dedication, patience, and continuous learning.
+Mafanikio hutoka kwa kujitolea, uvumilivu, na ujifunzaji wa mfululizo.
+Gũhinga gũũkaga na kwĩhatĩra, gũkirĩrĩria, na gũthiĩ na mbere kũmenya.
+Locho biro kuom chiwo, kendo kod puonjore ma ok tiek.
+
+# Health and Wellbeing
+Taking care of our physical and mental health should be a priority.
+Kujali afya yetu ya kimwili na kiakili inapaswa kuwa kipaumbele.
+Kũmenyerera mwĩrĩ na meciiria maitũ nĩkĩngĩagĩrĩire kũtuĩka kĩndũ kĩa mbere.
+Rito chuny kod delwa en gima makare mokwongo.
+
+Regular exercise and healthy eating habits contribute to a long, fulfilling life.
+Mazoezi ya kawaida na tabia za ulaji bora zinachangia maisha marefu na ya kuridhisha.
+Ciĩko cia mwĩrĩ na mĩtugo mĩega ya kũrĩa ikonagia mũndũ kũrĩa muoyo mũraihu na wa kũigana.
+Timo ka maber kod chamo chiemo maber konyo ngʼato bedo gi ngima mawielo ma ber.
+
+# Technology and Modern World
+Technology has transformed how we communicate, learn, and work in today's world.
+Teknolojia imebadilisha jinsi tunavyowasiliana, kujifunza, na kufanya kazi katika ulimwengu wa leo.
+Ũmenyi wa indo nĩũgarũrĩte ũrĩa twaragania, kũmenya maũndũ, na gũthoma thĩ ya ũmũthĩ.
+Rieko mar lwete oloko kaka wagiwero, puonjore, kod timo ticho e pinywa sani.
+
+While embracing new technology, we must not forget our cultural roots and traditions.
+Huku tukikumbatia teknolojia mpya, haturuhusiwi kusahau mizizi yetu ya kitamaduni na desturi.
+O tũkĩamũkĩra ũmenyi wa indo ũrĩa mwerũ, tũtikagĩrĩire kũriganĩrwo nĩ mĩri yaitũ ya ũtamaduni na mĩtugo.
+Kata ka wayamo rieko manyien mag lwete, kik wawil gik ma kwerewa noketo.
+
+# Dreams and Aspirations
+I dream of a world where all children have equal opportunities to succeed and thrive.
+Ninaota ulimwengu ambapo watoto wote wana fursa sawa za kufanikiwa na kustawi.
+Nĩnjutaga thĩ ĩrĩa ciana ciothe ikagĩa na mahinda maiganu ma gũhinga na gũthama.
+Aleko piny ma nyithindo duto bed gi teko mar duto ma romre mondo olocho kendo odongo.
+
+My hope is that future generations will live in peace and harmony with nature.
+Tumaini langu ni kizazi vijavyo vitaishi kwa amani na umoja na mazingira.
+Mwĩhoko wakwa nĩ atĩ andũ arĩa magooka magaatũũra na thayũ na kũiguanĩrĩria na kĩrĩndĩ gĩa indo ciothe.
+Geno mara en ni tienge mabiro nodag gi kwe kod riwruok gi gik motegno duto.
+
+Together, we can build a better future for our children and their children.
+Pamoja, tunaweza kujenga siku zijazo bora kwa watoto wetu na watoto wao.
+Hamwe, tũngĩhota gwaka makinya mega ma ciana ciitũ na ciana ciacio.
+Kanyakla, wanyalo gero kinde maber ne nyithindwa kod nyikwagi.
+
+# Extended Conversations
+Person A: I heard you recently visited your family in the village. How was the experience?
+Person B: It was wonderful! I had forgotten how peaceful and beautiful rural life can be. The air is so fresh, and everyone knows each other.
+Person A: That sounds amazing. I sometimes miss the simplicity of village life, away from the busy city.
+Person B: Yes, there's something special about waking up to the sound of birds and roosters instead of traffic and horns.
+
+Mtu A: Nilisikia umezuru familia yako kijijini hivi karibuni. Ulifurahije?
+Mtu B: Ilikuwa vizuri sana! Nimesahau jinsi maisha ya mashambani yanavyoweza kuwa ya utulivu na mazuri. Hewa ni msafi sana, na kila mtu anajuana.
+Mtu A: Hiyo inasikika ajabu. Wakati mwingine ninakosa urahisi wa maisha ya kijiji, mbali na jiji lenye msisimko.
+Mtu B: Ndiyo, kuna kitu cha kipekee kuhusu kuamka na sauti ya ndege na jogoo badala ya magari na mapembe.
+
+Mũndũ A: Nĩnjiguĩte atĩ ũrĩ wathiĩte kwona andũ a nyũmba yaku mũcii-inĩ o ro rĩu. Watikire atĩa?
+Mũndũ B: Nĩ kwarorete! Ndaariganĩirwo nĩ ũrĩa maisha ma itũũra-inĩ matuĩkaga ma thayũ na mathaka. Rũhuho nĩ rwega mũno, na andũ othe nimekũmanaga.
+Mũndũ A: Ũguo nĩ gwega mũno. Hĩndĩ ĩmwe njagĩa kũnyendaga ũrũthũ wa maisha ma itũũra-inĩ, ndehera itũũra rĩa inene.
+Mũndũ B: Ĩĩ nĩ harĩ ũndũ wa njamba rĩrĩa mũndũ okĩragwo nĩ mũgambo wa nyoni na njamba handũ ha magari na coro.
+
+Ngʼat A: Asewinjo ni ne idhi e dalau machien. Ne dhi kaka nadi?
+Ngʼat B: Nodhi maber ahinya! Wiu ni kaka dala ber kendo bedo gi kwe. Yamo ber ahinya, kendo ji duto ongʼere.
+Ngʼat A: Mano nenore maber. Kinde moko ahero ngima ma yot dala, ma ok gira gi kaka ma dala maduongʼ.
+Ngʼat B: Ee, nitie gima bende moloyo ka ichiewo gi ywak winyo kod jogoo ma ok ywak mago.
+
+# More Complex Language Patterns
+The interconnectedness of our modern world means that events in one place can affect people everywhere.
+Uhusiano wa ulimwengu wetu wa kisasa unamaanisha kuwa matukio mahali pamoja yanaweza kuathiri watu kila mahali.
+Nguguano ya thĩ yaitũ ya ũmũthĩ nĩrĩrĩa maũndũ mekaga ha hamwe makonagia andũ kũndũ guothe.
+Kanyruok mar pinywa sani nyiso ni gima ditimore kamoro nyalo mako ji kuonde duto.
+
+Language is not just a tool for communication, but a vessel that carries the soul and identity of a people.
+Lugha sio tu chombo cha mawasiliano, bali ni chombo kinachobeba roho na utambulisho wa watu.
+Lũthiomi ti indo ya kwaragana tu, no nĩ kĩbita kĩrĩa gĩkuuaga roho na unangĩko wa andũ.
+Dhok ok mana gir wuoyo kende, to en gir makuayo chuny kod ngʼeyo ngʼat mane.
+
+When we lose a language, we lose an entire way of seeing and understanding the world.
+Tunapoteza lugha, tunapoteza njia nzima ya kuona na kuelewa ulimwengu.
+Rĩrĩa twaga lũthiomi, twagaga njĩra yothe ya kuona na gũtaũkĩrwo nĩ thĩ.
+Ka dahiny dhok moro to walal yo malach mar neno kod winjo piny.
+
+# Emotional and Philosophical Reflections
+Life teaches us that happiness comes not from what we have, but from appreciating what we already possess.
+Maisha yanatufundisha kwamba furaha haiji kutoka vile tulivyo navyo, bali kutoka kuwashukuru yale tuliyonayo.
+Muoyo ũratũrutaga atĩ gĩkeno gĩũkaga ti na ũndũ wa kĩrĩa tũrĩ nakĩo, no nĩ gũcanjamũka kĩrĩa tũrĩ nakĩo.
+Ngima nyiso ni mor ok biro gi gik ma wantie kodgi, to kuom wer ni gik ma wasebedo kodgi.
+
+The strength of a community lies in its ability to care for the most vulnerable among them.
+Nguvu ya jamii iko katika uwezo wake wa kujali walio katika mazingira magumu zaidi miongoni mwao.
+Hinya wa kĩrĩndĩ ũrĩ na ũhoti wa kũmenyerera arĩa marĩ na thĩĩna gatagatĩ-inĩ.
+Teko mar oganda nitie e teko mare mar rito joma chandore moloyo e diergi.
+
+True wisdom is knowing that there is always more to learn and understand.
+Busara ya kweli ni kujua kuna mengi zaidi ya kujifunza na kuelewa.
+Ũũgĩ wa ma nĩ kũmenya atĩ no gũkorwo kũrĩ na maũndũ maingĩ ma kũmenya na gũtaũkĩrwo.
+Rieko madier en ngʼeyo ni gik mangʼeny pod nigi mar puonjore kod winjo.
+
+Remember, every conversation is an opportunity to learn something new and connect with another human being.
+Kumbuka, mazungumzo yote ni fursa ya kujifunza kitu kipya na kuungana na mtu mwingine.
+Ririkana, mĩario yothe nĩ mahinda ma kũmenya ũndũ ũngĩ na kuohanĩrĩria na mũndũ ũngĩ.
+Par ni wuoyo duto gin thuolo mar puonjore gima manyien kod riwre gi ngʼato machielo.
