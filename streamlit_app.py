@@ -12,7 +12,23 @@ import datetime
 import os
 from pathlib import Path
 import base64
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
+import asyncio
+import threading
+
+# Import federated learning module
+try:
+    from federated_learning import FederatedLearningClient, EXAMPLE_FEDERATED_SOURCES
+    FEDERATED_LEARNING_AVAILABLE = True
+except ImportError:
+    FEDERATED_LEARNING_AVAILABLE = False
+
+# Import dictionary learning module
+try:
+    from online_dictionary_learner import OnlineDictionaryLearner
+    DICTIONARY_LEARNING_AVAILABLE = True
+except ImportError:
+    DICTIONARY_LEARNING_AVAILABLE = False
 
 # Page configuration
 st.set_page_config(
@@ -573,6 +589,24 @@ def init_session_state():
         st.session_state.chat_counter = 0
     if 'sidebar_state' not in st.session_state:
         st.session_state.sidebar_state = 'chats'  # 'chats', 'settings', or 'learning'
+    if 'feedback_data' not in st.session_state:
+        st.session_state.feedback_data = []
+    if 'learning_analytics' not in st.session_state:
+        st.session_state.learning_analytics = {
+            'language_usage': {'en': 0, 'sw': 0, 'ki': 0, 'luo': 0, 'auto': 0},
+            'response_ratings': [],
+            'error_reports': [],
+            'conversation_topics': [],
+            'user_satisfaction': []
+        }
+    if 'federated_client' not in st.session_state and FEDERATED_LEARNING_AVAILABLE:
+        st.session_state.federated_client = None
+        st.session_state.federated_enabled = False
+        st.session_state.federated_sources = []
+    if 'dictionary_learner' not in st.session_state and DICTIONARY_LEARNING_AVAILABLE:
+        st.session_state.dictionary_learner = None
+        st.session_state.dictionary_learning_status = 'idle'
+        st.session_state.last_dictionary_learning = None
 
 # Check API status
 def check_api_status():
@@ -716,7 +750,213 @@ def get_chat_summary(chat):
     else:
         preview = f"AI: {last_message['content'][:40]}"
     
-    return preview + "..." if len(last_message['content']) > 40 else preview
+    return preview + "..."         if len(last_message['content']) > 40 else preview
+
+# Feedback and learning functions
+def add_feedback(message_index, chat_id, rating, feedback_text=""):
+    """Add user feedback for a specific message"""
+    feedback = {
+        'timestamp': datetime.datetime.now().isoformat(),
+        'chat_id': chat_id,
+        'message_index': message_index,
+        'rating': rating,
+        'feedback_text': feedback_text,
+        'message_content': st.session_state.chats[chat_id]['messages'][message_index]['content']
+    }
+    st.session_state.feedback_data.append(feedback)
+    st.session_state.learning_analytics['response_ratings'].append(rating)
+    
+    # Create federated learning update from feedback
+    if st.session_state.get('federated_enabled', False):
+        # Get the AI response message
+        message = st.session_state.chats[chat_id]['messages'][message_index]
+        
+        federated_feedback = {
+            'language': message.get('language', 'auto'),
+            'rating': rating,
+            'feedback_text': feedback_text,
+            'confidence': message.get('confidence', 0.5),
+            'cultural_context': 'general',  # Could be enhanced based on user profile
+            'response_time': 1000,  # Placeholder - could track actual response time
+        }
+        
+        create_federated_update_from_feedback(federated_feedback)
+
+def add_error_report(error_type, description, context=""):
+    """Add an error report for learning improvement"""
+    error_report = {
+        'timestamp': datetime.datetime.now().isoformat(),
+        'error_type': error_type,
+        'description': description,
+        'context': context,
+        'chat_id': st.session_state.active_chat_id
+    }
+    st.session_state.learning_analytics['error_reports'].append(error_report)
+
+def update_language_usage(language):
+    """Track language usage for analytics"""
+    if language in st.session_state.learning_analytics['language_usage']:
+        st.session_state.learning_analytics['language_usage'][language] += 1
+
+def export_learning_data():
+    """Export all learning data for model improvement"""
+    learning_data = {
+        'exported_at': datetime.datetime.now().isoformat(),
+        'feedback_data': st.session_state.feedback_data,
+        'analytics': st.session_state.learning_analytics,
+        'total_conversations': len(st.session_state.chats),
+        'total_messages': sum(chat['total_messages'] for chat in st.session_state.chats.values()),
+        'conversations': st.session_state.chats
+    }
+    
+    json_str = json.dumps(learning_data, indent=2, default=str, ensure_ascii=False)
+    return json_str
+
+def get_learning_insights():
+    """Generate insights from collected learning data"""
+    analytics = st.session_state.learning_analytics
+    
+    insights = {
+        'most_used_language': max(analytics['language_usage'], key=analytics['language_usage'].get),
+        'average_rating': sum(analytics['response_ratings']) / len(analytics['response_ratings']) if analytics['response_ratings'] else 0,
+        'total_feedback': len(st.session_state.feedback_data),
+        'total_errors': len(analytics['error_reports']),
+        'language_distribution': analytics['language_usage']
+    }
+    
+    return insights
+
+# Federated learning functions
+def initialize_federated_learning():
+    """Initialize federated learning client"""
+    if not FEDERATED_LEARNING_AVAILABLE:
+        return False
+    
+    try:
+        if st.session_state.federated_client is None:
+            st.session_state.federated_client = FederatedLearningClient()
+            
+            # Add default learning sources
+            for source_config in EXAMPLE_FEDERATED_SOURCES:
+                st.session_state.federated_client.add_learning_source(source_config)
+                st.session_state.federated_sources.append(source_config)
+            
+            st.session_state.federated_enabled = True
+            return True
+    except Exception as e:
+        st.error(f"Failed to initialize federated learning: {e}")
+        return False
+
+def add_federated_learning_source(source_config: Dict[str, Any]):
+    """Add a new federated learning source"""
+    if st.session_state.federated_client:
+        st.session_state.federated_client.add_learning_source(source_config)
+        st.session_state.federated_sources.append(source_config)
+        return True
+    return False
+
+def create_federated_update_from_feedback(feedback_data: Dict[str, Any]):
+    """Create federated learning update from user feedback"""
+    if not st.session_state.federated_enabled or not st.session_state.federated_client:
+        return
+    
+    try:
+        # Prepare data for federated learning
+        federated_data = {
+            'type': 'feedback',
+            'language': feedback_data.get('language', 'auto'),
+            'feedback': {
+                'rating': feedback_data.get('rating', 3),
+                'text': feedback_data.get('feedback_text', ''),
+                'error_type': feedback_data.get('error_type'),
+                'improvement_area': feedback_data.get('improvement_area', 'general')
+            },
+            'cultural_context': feedback_data.get('cultural_context', 'general'),
+            'performance': {
+                'response_time': feedback_data.get('response_time', 0),
+                'accuracy': feedback_data.get('confidence', 0.5),
+                'satisfaction_score': feedback_data.get('rating', 3) / 5.0
+            }
+        }
+        
+        # Create privacy-preserving update
+        update = st.session_state.federated_client.create_privacy_preserving_update(federated_data)
+        st.session_state.federated_client.local_updates.append(update)
+        
+    except Exception as e:
+        st.error(f"Error creating federated update: {e}")
+
+async def run_federated_learning_sync():
+    """Run federated learning synchronization"""
+    if st.session_state.federated_client and st.session_state.federated_enabled:
+        try:
+            # Fetch updates from all sources
+            all_updates = []
+            
+            for source in st.session_state.federated_client.learning_sources:
+                if source['enabled']:
+                    updates = await st.session_state.federated_client.fetch_updates_from_source(source)
+                    all_updates.extend(updates)
+            
+            if all_updates:
+                # Aggregate updates
+                aggregated = st.session_state.federated_client.aggregate_updates(all_updates)
+                
+                # Apply learning
+                improvements = st.session_state.federated_client.apply_federated_learning(aggregated)
+                
+                # Store results
+                st.session_state.federated_client.aggregated_knowledge.update(aggregated)
+                
+                return len(all_updates), improvements
+            
+        except Exception as e:
+            st.error(f"Federated learning sync error: {e}")
+    
+    return 0, {}
+
+def get_federated_learning_status():
+    """Get federated learning status"""
+    if not st.session_state.federated_enabled or not st.session_state.federated_client:
+        return {
+            'enabled': False,
+            'status': 'Not initialized'
+        }
+    
+    return {
+        'enabled': True,
+        'status': 'Active',
+        **st.session_state.federated_client.get_learning_status()
+    }
+
+# Dictionary learning functions
+async def run_dictionary_learning(languages: List[str] = ['luo']):
+    """Run dictionary learning for specified languages"""
+    if not DICTIONARY_LEARNING_AVAILABLE:
+        return {'error': 'Dictionary learning not available'}
+    
+    try:
+        st.session_state.dictionary_learning_status = 'running'
+        
+        learner = OnlineDictionaryLearner()
+        report = await learner.learn_from_online_dictionaries(languages)
+        
+        st.session_state.last_dictionary_learning = report
+        st.session_state.dictionary_learning_status = 'completed'
+        
+        return report
+    
+    except Exception as e:
+        st.session_state.dictionary_learning_status = 'error'
+        return {'error': str(e)}
+
+def get_dictionary_learning_status():
+    """Get dictionary learning status"""
+    return {
+        'status': st.session_state.get('dictionary_learning_status', 'idle'),
+        'last_run': st.session_state.get('last_dictionary_learning'),
+        'available': DICTIONARY_LEARNING_AVAILABLE
+    }
 
 # Language detection and examples
 LANGUAGE_CONFIG = {
@@ -845,69 +1085,68 @@ def main():
         
         st.markdown("---")
         
-        # Chat selection dropdown
-        st.subheader("💬 Chat Selection")
+        # Navigation tabs for sidebar
+        tab1, tab2, tab3 = st.tabs(["💬 Chats", "⚙️ Settings", "📊 Learning"])
         
-        if st.session_state.chats:
-            # Create options for dropdown
-            chat_options = {}
-            for chat_id, chat in st.session_state.chats.items():
-                title = chat['title'][:30] + "..." if len(chat['title']) > 30 else chat['title']
-                chat_options[title] = chat_id
+        with tab1:
+            # Chat selection dropdown
+            st.subheader("Chat Selection")
             
-            # Get current selection
-            current_chat = get_active_chat()
-            current_title = current_chat['title'][:30] + "..." if len(current_chat['title']) > 30 else current_chat['title']
+            if st.session_state.chats:
+                # Create options for dropdown
+                chat_options = {}
+                for chat_id, chat in st.session_state.chats.items():
+                    title = chat['title'][:30] + "..." if len(chat['title']) > 30 else chat['title']
+                    chat_options[title] = chat_id
+                
+                # Get current selection
+                current_chat = get_active_chat()
+                current_title = current_chat['title'][:30] + "..." if len(current_chat['title']) > 30 else current_chat['title']
+                
+                selected_chat_title = st.selectbox(
+                    "Select Chat:",
+                    options=list(chat_options.keys()),
+                    index=list(chat_options.keys()).index(current_title) if current_title in chat_options else 0,
+                    key="chat_selector"
+                )
+                
+                # Update active chat if selection changed
+                selected_chat_id = chat_options[selected_chat_title]
+                if selected_chat_id != st.session_state.active_chat_id:
+                    st.session_state.active_chat_id = selected_chat_id
+                    st.rerun()
             
-            selected_chat_title = st.selectbox(
-                "Select Chat:",
-                options=list(chat_options.keys()),
-                index=list(chat_options.keys()).index(current_title) if current_title in chat_options else 0,
-                key="chat_selector"
+            # New chat button
+            if st.button("➕ New Chat", use_container_width=True, type="primary"):
+                create_new_chat()
+                st.rerun()
+            
+            # Delete current chat button (only if more than one chat exists)
+            if st.session_state.chats and len(st.session_state.chats) > 1:
+                if st.button("🗑️ Delete Current Chat", use_container_width=True):
+                    delete_chat(st.session_state.active_chat_id)
+                    st.rerun()
+        
+        with tab2:
+            # Language selection
+            st.subheader("🌐 Language Settings")
+            
+            # Get current chat for language preference
+            active_chat = get_active_chat()
+            current_language = active_chat.get('language', 'auto')
+            
+            selected_language = st.selectbox(
+                "Response Language:",
+                options=list(LANGUAGE_CONFIG.keys()),
+                format_func=lambda x: f"{LANGUAGE_CONFIG[x]['flag']} {LANGUAGE_CONFIG[x]['name']}",
+                index=list(LANGUAGE_CONFIG.keys()).index(current_language) if current_language in LANGUAGE_CONFIG else 0,
+                key="language_selector"
             )
             
-            # Update active chat if selection changed
-            selected_chat_id = chat_options[selected_chat_title]
-            if selected_chat_id != st.session_state.active_chat_id:
-                st.session_state.active_chat_id = selected_chat_id
-                st.rerun()
-        
-        # New chat button
-        if st.button("➕ New Chat", use_container_width=True, type="primary"):
-            create_new_chat()
-            st.rerun()
-        
-        # Delete current chat button (only if more than one chat exists)
-        if st.session_state.chats and len(st.session_state.chats) > 1:
-            if st.button("🗑️ Delete Current Chat", use_container_width=True):
-                delete_chat(st.session_state.active_chat_id)
-                st.rerun()
-        
-        st.markdown("---")
-        
-        # Language selection
-        st.subheader("🌐 Language Settings")
-        
-        # Get current chat for language preference
-        active_chat = get_active_chat()
-        current_language = active_chat.get('language', 'auto')
-        
-        selected_language = st.selectbox(
-            "Response Language:",
-            options=list(LANGUAGE_CONFIG.keys()),
-            format_func=lambda x: f"{LANGUAGE_CONFIG[x]['flag']} {LANGUAGE_CONFIG[x]['name']}",
-            index=list(LANGUAGE_CONFIG.keys()).index(current_language) if current_language in LANGUAGE_CONFIG else 0,
-            key="language_selector"
-        )
-        
-        # Update chat language preference
-        if selected_language != current_language:
-            active_chat['language'] = selected_language
-        
-        st.markdown("---")
-        
-        # Settings in expandable section
-        with st.expander("⚙️ Settings"):
+            # Update chat language preference
+            if selected_language != current_language:
+                active_chat['language'] = selected_language
+            
             # Temperature control
             temperature = st.slider("🌡️ Creativity", 0.1, 1.0, 0.7, 0.1, key="temperature_setting")
             
@@ -918,11 +1157,22 @@ def main():
                 if st.button(f"📝 {example[:25]}...", key=f"example_{i}", use_container_width=True):
                     st.session_state.example_clicked = example
             
-            # Export chat
+            # Export options
+            st.markdown("**📁 Export Options:**")
             if st.button("💾 Export Current Chat", use_container_width=True):
                 export_chat()
             
-            # Clear chat
+            if st.button("📥 Export All Learning Data", use_container_width=True):
+                learning_json = export_learning_data()
+                st.download_button(
+                    label="📥 Download Learning Data",
+                    data=learning_json,
+                    file_name=f"learning_data_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                    mime="application/json"
+                )
+            
+            # Clear options
+            st.markdown("**🗑️ Clear Options:**")
             if st.button("🗑️ Clear Messages", use_container_width=True):
                 active_chat = get_active_chat()
                 active_chat['messages'] = []
@@ -930,9 +1180,262 @@ def main():
                 active_chat['total_tokens'] = 0
                 st.rerun()
         
-        # Chat statistics in expandable section
+        with tab3:
+            # Learning Analytics Dashboard
+            st.subheader("🎓 Learning Analytics")
+            
+            insights = get_learning_insights()
+            
+            # Federated Learning Section
+            if FEDERATED_LEARNING_AVAILABLE:
+                with st.expander("🌐 Federated Learning", expanded=False):
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        if not st.session_state.federated_enabled:
+                            if st.button("🚀 Enable Federated Learning", use_container_width=True):
+                                if initialize_federated_learning():
+                                    st.success("✅ Federated learning enabled!")
+                                    st.rerun()
+                        else:
+                            st.success("✅ Federated Learning Active")
+                            
+                            if st.button("🔄 Sync Now", use_container_width=True):
+                                with st.spinner("Syncing with federated sources..."):
+                                    # Run sync in background
+                                    try:
+                                        loop = asyncio.new_event_loop()
+                                        asyncio.set_event_loop(loop)
+                                        updates_count, improvements = loop.run_until_complete(run_federated_learning_sync())
+                                        loop.close()
+                                        
+                                        if updates_count > 0:
+                                            st.success(f"📊 Synced {updates_count} updates!")
+                                        else:
+                                            st.info("📊 No new updates available")
+                                    except Exception as e:
+                                        st.error(f"Sync failed: {e}")
+                    
+                    with col2:
+                        fed_status = get_federated_learning_status()
+                        if fed_status['enabled']:
+                            st.metric("Active Sources", fed_status.get('active_sources', 0))
+                            st.metric("Local Updates", fed_status.get('local_updates', 0))
+                    
+                    # Federated Learning Sources Management
+                    st.markdown("**📡 Learning Sources:**")
+                    
+                    if st.session_state.federated_enabled and st.session_state.federated_sources:
+                        for i, source in enumerate(st.session_state.federated_sources):
+                            with st.container():
+                                col1, col2, col3 = st.columns([3, 1, 1])
+                                
+                                with col1:
+                                    st.write(f"**{source['id']}** ({source['type']})")
+                                    st.caption(f"Languages: {', '.join(source['languages'])}")
+                                
+                                with col2:
+                                    status = "🟢 Active" if source['enabled'] else "🔴 Disabled"
+                                    st.write(status)
+                                
+                                with col3:
+                                    trust_level = source.get('trust_level', 0.5)
+                                    st.metric("Trust", f"{trust_level:.1f}")
+                    
+                    # Add new source
+                    with st.expander("➕ Add Learning Source"):
+                        new_source_id = st.text_input("Source ID:", placeholder="my_source")
+                        new_source_url = st.text_input("URL/Path:", placeholder="https://api.example.com/data")
+                        new_source_type = st.selectbox("Type:", ["api", "file", "github"])
+                        new_languages = st.multiselect("Languages:", ["en", "sw", "ki", "luo"], default=["en", "sw", "ki", "luo"])
+                        new_trust_level = st.slider("Trust Level:", 0.0, 1.0, 0.7, 0.1)
+                        new_cultural_context = st.text_input("Cultural Context:", placeholder="general")
+                        
+                        if st.button("Add Source"):
+                            if new_source_id and new_source_url:
+                                new_source_config = {
+                                    'id': new_source_id,
+                                    'url': new_source_url,
+                                    'type': new_source_type,
+                                    'languages': new_languages,
+                                    'trust_level': new_trust_level,
+                                    'cultural_context': new_cultural_context,
+                                    'enabled': True
+                                }
+                                
+                                if add_federated_learning_source(new_source_config):
+                                    st.success(f"✅ Added source: {new_source_id}")
+                                    st.rerun()
+                            else:
+                                st.error("Please provide Source ID and URL")
+                    
+                    # Federated Learning Insights
+                    if st.session_state.federated_enabled and st.session_state.federated_client:
+                        aggregated_knowledge = getattr(st.session_state.federated_client, 'aggregated_knowledge', {})
+                        
+                        if aggregated_knowledge:
+                            st.markdown("**🧠 Federated Insights:**")
+                            
+                            # Language improvements from federated learning
+                            lang_improvements = aggregated_knowledge.get('language_improvements', {})
+                            if lang_improvements:
+                                for lang, data in lang_improvements.items():
+                                    if data.get('update_count', 0) > 0:
+                                        st.info(f"📈 {LANGUAGE_CONFIG.get(lang, {}).get('name', lang)}: {data['update_count']} federated updates, Quality: {data.get('quality_score', 0):.2f}")
+                            
+                            # Cultural insights
+                            cultural_insights = aggregated_knowledge.get('cultural_insights', {})
+                            if cultural_insights:
+                                for context, data in cultural_insights.items():
+                                    if data.get('update_count', 0) > 0:
+                                        st.info(f"🌍 {context}: {data['update_count']} cultural updates")
+            
+            # Dictionary Learning Section
+            if DICTIONARY_LEARNING_AVAILABLE:
+                with st.expander("📚 Online Dictionary Learning", expanded=False):
+                    dict_status = get_dictionary_learning_status()
+                    
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        st.markdown("**Learn from Online Dictionaries:**")
+                        st.markdown("• 🌐 Glosbe.com - Luo, Kiswahili, Kikuyu")
+                        st.markdown("• 📖 Wiktionary - Vocabulary expansion")
+                        st.markdown("• 🔍 Automatic cultural context detection")
+                        
+                        # Language selection for learning
+                        learning_languages = st.multiselect(
+                            "Languages to learn:",
+                            ['luo', 'sw', 'ki'],
+                            default=['luo'],
+                            help="Select languages to learn vocabulary from online dictionaries"
+                        )
+                        
+                        if st.button("🚀 Start Dictionary Learning", use_container_width=True):
+                            if learning_languages:
+                                with st.spinner(f"Learning vocabulary for {', '.join(learning_languages)}..."):
+                                    try:
+                                        # Run dictionary learning
+                                        loop = asyncio.new_event_loop()
+                                        asyncio.set_event_loop(loop)
+                                        report = loop.run_until_complete(run_dictionary_learning(learning_languages))
+                                        loop.close()
+                                        
+                                        if 'error' not in report:
+                                            st.success(f"✅ Learned {report.get('total_entries', 0)} vocabulary entries!")
+                                            if report.get('output_file'):
+                                                st.info(f"📁 Saved to: {report['output_file']}")
+                                        else:
+                                            st.error(f"❌ Learning failed: {report['error']}")
+                                        
+                                        st.rerun()
+                                    except Exception as e:
+                                        st.error(f"❌ Dictionary learning error: {e}")
+                            else:
+                                st.warning("Please select at least one language")
+                    
+                    with col2:
+                        # Dictionary learning status
+                        status = dict_status['status']
+                        if status == 'idle':
+                            st.info("🔷 Ready to learn")
+                        elif status == 'running':
+                            st.warning("🔄 Learning in progress...")
+                        elif status == 'completed':
+                            st.success("✅ Learning completed")
+                        elif status == 'error':
+                            st.error("❌ Learning failed")
+                        
+                        # Last learning report
+                        if dict_status['last_run']:
+                            last_run = dict_status['last_run']
+                            st.metric("Entries Learned", last_run.get('total_entries', 0))
+                            st.metric("Languages", len(last_run.get('languages_processed', [])))
+                            
+                            if 'quality_summary' in last_run:
+                                quality = last_run['quality_summary']
+                                st.metric("Avg Quality", f"{quality.get('average', 0):.2f}")
+                    
+                    # Quick Luo learning button
+                    st.markdown("**🎯 Quick Luo Dictionary:**")
+                    if st.button("📖 Learn Essential Luo Words from Glosbe", use_container_width=True):
+                        with st.spinner("Learning essential Luo vocabulary from https://glosbe.com/en/luo..."):
+                            try:
+                                # Quick Luo learning
+                                loop = asyncio.new_event_loop()
+                                asyncio.set_event_loop(loop)
+                                
+                                # Import and run the specific Luo learning
+                                from learn_luo_dictionary import learn_luo_dictionary
+                                entries = loop.run_until_complete(learn_luo_dictionary())
+                                loop.close()
+                                
+                                if entries:
+                                    st.success(f"✅ Learned {len(entries)} Luo vocabulary entries from Glosbe!")
+                                    
+                                    # Show sample words
+                                    st.markdown("**Sample Luo vocabulary:**")
+                                    for entry in entries[:5]:
+                                        if entry.target_word:
+                                            st.write(f"• {entry.source_word} → {entry.target_word}")
+                                else:
+                                    st.warning("No Luo vocabulary was learned")
+                                
+                            except Exception as e:
+                                st.error(f"Error learning Luo: {e}")
+            
+            # Regular Analytics (existing code)
+            # Key metrics
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Avg Rating", f"{insights['average_rating']:.1f}/5")
+            with col2:
+                st.metric("Total Feedback", insights['total_feedback'])
+            with col3:
+                st.metric("Error Reports", insights['total_errors'])
+            
+            # Language usage chart
+            if any(insights['language_distribution'].values()):
+                st.markdown("**📊 Language Usage:**")
+                lang_data = insights['language_distribution']
+                for lang, count in lang_data.items():
+                    if count > 0:
+                        st.metric(f"{LANGUAGE_CONFIG[lang]['flag']} {LANGUAGE_CONFIG[lang]['name']}", count)
+            
+            # Recent feedback
+            if st.session_state.feedback_data:
+                st.markdown("**📝 Recent Feedback:**")
+                recent_feedback = st.session_state.feedback_data[-5:]  # Last 5 feedback items
+                for feedback in reversed(recent_feedback):
+                    with st.expander(f"Rating: {feedback['rating']}/5 - {feedback['timestamp'][:10]}"):
+                        st.write(f"**Message:** {feedback['message_content'][:100]}...")
+                        if feedback['feedback_text']:
+                            st.write(f"**Feedback:** {feedback['feedback_text']}")
+            
+            # Error reports
+            if st.session_state.learning_analytics['error_reports']:
+                st.markdown("**🚨 Recent Error Reports:**")
+                recent_errors = st.session_state.learning_analytics['error_reports'][-3:]  # Last 3 errors
+                for error in reversed(recent_errors):
+                    with st.expander(f"{error['error_type']} - {error['timestamp'][:10]}"):
+                        st.write(f"**Description:** {error['description']}")
+                        if error['context']:
+                            st.write(f"**Context:** {error['context']}")
+            
+            # Learning improvement suggestions
+            st.markdown("**💡 Improvement Suggestions:**")
+            if insights['average_rating'] < 3.0 and insights['total_feedback'] > 5:
+                st.warning("📈 Consider reviewing low-rated responses for improvement opportunities")
+            
+            if insights['total_errors'] > 0:
+                st.info("🔧 Review error reports to identify common issues")
+            
+            if insights['most_used_language'] != 'auto':
+                st.info(f"🌟 {LANGUAGE_CONFIG[insights['most_used_language']]['name']} is your most used language")
+        
+        # Chat statistics (moved to bottom)
         if st.session_state.chats:
-            with st.expander("📊 Statistics"):
+            with st.expander("📊 Overall Statistics"):
                 total_messages = sum(chat['total_messages'] for chat in st.session_state.chats.values())
                 total_tokens = sum(chat['total_tokens'] for chat in st.session_state.chats.values())
                 
@@ -969,18 +1472,82 @@ def main():
                     st.caption(f"👤 You • {message.get('timestamp', '')}")
             else:
                 with st.container():
-                    st.markdown(f"""
-                    <div class="message">
-                        <div class="assistant-message">
-                            {message["content"]}
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    col1, col2 = st.columns([6, 1])
                     
-                    # Simple metadata
-                    lang = message.get('language', 'Unknown')
-                    confidence = message.get('confidence', 0)
-                    st.caption(f"🤖 AI • {lang} • {confidence:.0%} confidence • {message.get('timestamp', '')}")
+                    with col1:
+                        st.markdown(f"""
+                        <div class="message">
+                            <div class="assistant-message">
+                                {message["content"]}
+                            </div>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        # Simple metadata
+                        lang = message.get('language', 'Unknown')
+                        confidence = message.get('confidence', 0)
+                        st.caption(f"🤖 AI • {lang} • {confidence:.0%} confidence • {message.get('timestamp', '')}")
+                    
+                    with col2:
+                        # Feedback buttons for each AI response
+                        message_idx = len([m for m in messages[:messages.index(message)+1] if m['role'] == 'assistant']) - 1
+                        
+                        st.write("Rate this response:")
+                        col_thumbs_up, col_thumbs_down = st.columns(2)
+                        
+                        with col_thumbs_up:
+                            if st.button("👍", key=f"thumbs_up_{messages.index(message)}", help="Good response"):
+                                add_feedback(messages.index(message), st.session_state.active_chat_id, 5, "Thumbs up")
+                                st.success("Thanks for the feedback!")
+                                st.rerun()
+                        
+                        with col_thumbs_down:
+                            if st.button("👎", key=f"thumbs_down_{messages.index(message)}", help="Poor response"):
+                                add_feedback(messages.index(message), st.session_state.active_chat_id, 1, "Thumbs down")
+                                st.warning("Thanks for the feedback! We'll improve.")
+                                st.rerun()
+                        
+                        # Detailed rating
+                        with st.expander("📊 Detailed Rating"):
+                            rating = st.radio(
+                                "Rate (1-5):",
+                                [1, 2, 3, 4, 5],
+                                index=2,
+                                key=f"detailed_rating_{messages.index(message)}",
+                                horizontal=True
+                            )
+                            
+                            feedback_text = st.text_area(
+                                "Feedback:",
+                                placeholder="What could be improved?",
+                                key=f"feedback_text_{messages.index(message)}",
+                                height=60
+                            )
+                            
+                            if st.button("Submit Rating", key=f"submit_rating_{messages.index(message)}"):
+                                add_feedback(messages.index(message), st.session_state.active_chat_id, rating, feedback_text)
+                                st.success(f"Rating {rating}/5 submitted! Thank you!")
+                                st.rerun()
+                        
+                        # Error reporting
+                        with st.expander("🚨 Report Issue"):
+                            error_type = st.selectbox(
+                                "Issue Type:",
+                                ["Language Detection", "Grammar", "Cultural Context", "Inappropriate Response", "Technical Error", "Other"],
+                                key=f"error_type_{messages.index(message)}"
+                            )
+                            
+                            error_description = st.text_area(
+                                "Describe the issue:",
+                                placeholder="What went wrong?",
+                                key=f"error_desc_{messages.index(message)}",
+                                height=60
+                            )
+                            
+                            if st.button("Report Issue", key=f"report_error_{messages.index(message)}"):
+                                add_error_report(error_type, error_description, message["content"][:100])
+                                st.warning("Issue reported! We'll use this to improve.")
+                                st.rerun()
     
     # Simple message input
     st.markdown("---")
@@ -1047,6 +1614,9 @@ def main():
                 }
                 
                 api_language = language_mapping.get(selected_language, 'auto')
+                
+                # Track language usage for analytics
+                update_language_usage(selected_language)
                 
                 response = requests.post(f'{st.session_state.api_url}/chat', 
                     json={

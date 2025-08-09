@@ -1,0 +1,200 @@
+{
+  "federated_updates": [
+    {
+      "source_id": "kenyan_community_2025",
+      "language": "sw",
+      "update_type": "feedback",
+      "data": {
+        "feedback_pattern": {
+          "rating_category": "excellent",
+          "feedback_length": 45,
+          "error_type": null,
+          "improvement_area": "cultural_expressions"
+        },
+        "language_patterns": {
+          "primary_language": "kiswahili",
+          "code_switching": false,
+          "cultural_expressions": ["habari_za_asubuhi", "asante_sana"]
+        },
+        "performance_indicators": {
+          "response_time_category": "fast",
+          "accuracy_category": "high",
+          "user_satisfaction": 0.95
+        }
+      },
+      "timestamp": "2025-08-08T10:30:00Z",
+      "privacy_hash": "abc123def456",
+      "quality_score": 0.92,
+      "cultural_context": "kenyan_urban"
+    },
+    {
+      "source_id": "kikuyu_elders_council",
+      "language": "ki",
+      "update_type": "correction",
+      "data": {
+        "feedback_pattern": {
+          "rating_category": "good",
+          "feedback_length": 28,
+          "error_type": "cultural_context",
+          "improvement_area": "traditional_greetings"
+        },
+        "language_patterns": {
+          "primary_language": "kikuyu",
+          "code_switching": false,
+          "cultural_expressions": ["wi_atia", "ni_uguo_mwega"]
+        },
+        "performance_indicators": {
+          "response_time_category": "medium",
+          "accuracy_category": "medium",
+          "user_satisfaction": 0.75
+        }
+      },
+      "timestamp": "2025-08-08T11:15:00Z",
+      "privacy_hash": "fed456abc123",
+      "quality_score": 0.88,
+      "cultural_context": "kikuyu_traditional"
+    },
+    {
+      "source_id": "luo_youth_network",
+      "language": "luo",
+      "update_type": "new_data",
+      "data": {
+        "feedback_pattern": {
+          "rating_category": "excellent",
+          "feedback_length": 52,
+          "error_type": null,
+          "improvement_area": "modern_expressions"
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "code_switching": true,
+          "cultural_expressions": ["inadi", "amor_kuom_wuoyo"]
+        },
+        "performance_indicators": {
+          "response_time_category": "fast",
+          "accuracy_category": "high",
+          "user_satisfaction": 0.88
+        }
+      },
+      "timestamp": "2025-08-08T12:00:00Z",
+      "privacy_hash": "xyz789uvw012",
+      "quality_score": 0.85,
+      "cultural_context": "luo_contemporary"
+    },
+    {
+      "source_id": "diaspora_english_ki",
+      "language": "en",
+      "update_type": "feedback",
+      "data": {
+        "feedback_pattern": {
+          "rating_category": "good",
+          "feedback_length": 38,
+          "error_type": "code_switching",
+          "improvement_area": "multilingual_support"
+        },
+        "language_patterns": {
+          "primary_language": "english",
+          "code_switching": true,
+          "cultural_expressions": ["mix_english_kikuyu"]
+        },
+        "performance_indicators": {
+          "response_time_category": "medium",
+          "accuracy_category": "high",
+          "user_satisfaction": 0.82
+        }
+      },
+      "timestamp": "2025-08-08T13:20:00Z",
+      "privacy_hash": "mno345pqr678",
+      "quality_score": 0.79,
+      "cultural_context": "diaspora_mixed"
+    },
+    {
+      "source_id": "academic_research_uon",
+      "language": "sw",
+      "update_type": "correction",
+      "data": {
+        "feedback_pattern": {
+          "rating_category": "excellent",
+          "feedback_length": 65,
+          "error_type": "grammar",
+          "improvement_area": "formal_language"
+        },
+        "language_patterns": {
+          "primary_language": "kiswahili",
+          "code_switching": false,
+          "cultural_expressions": ["lugha_rasmi", "mazungumzo_ya_kielimu"]
+        },
+        "performance_indicators": {
+          "response_time_category": "fast",
+          "accuracy_category": "high",
+          "user_satisfaction": 0.94
+        }
+      },
+      "timestamp": "2025-08-08T14:45:00Z",
+      "privacy_hash": "stu901vwx234",
+      "quality_score": 0.96,
+      "cultural_context": "academic_formal"
+    },
+    {
+      "source_id": "rural_community_embu",
+      "language": "ki",
+      "update_type": "feedback",
+      "data": {
+        "feedback_pattern": {
+          "rating_category": "good",
+          "feedback_length": 31,
+          "error_type": "pronunciation",
+          "improvement_area": "regional_dialects"
+        },
+        "language_patterns": {
+          "primary_language": "kikuyu",
+          "code_switching": false,
+          "cultural_expressions": ["embu_dialect", "traditional_phrases"]
+        },
+        "performance_indicators": {
+          "response_time_category": "medium",
+          "accuracy_category": "medium",
+          "user_satisfaction": 0.73
+        }
+      },
+      "timestamp": "2025-08-08T15:30:00Z",
+      "privacy_hash": "ghi567jkl890",
+      "quality_score": 0.82,
+      "cultural_context": "rural_traditional"
+    }
+  ],
+  "metadata": {
+    "dataset_version": "2025.08.01",
+    "total_updates": 6,
+    "languages_covered": ["sw", "ki", "luo", "en"],
+    "cultural_contexts": [
+      "kenyan_urban",
+      "kikuyu_traditional", 
+      "luo_contemporary",
+      "diaspora_mixed",
+      "academic_formal",
+      "rural_traditional"
+    ],
+    "quality_range": {
+      "min": 0.79,
+      "max": 0.96,
+      "average": 0.87
+    },
+    "time_range": {
+      "start": "2025-08-08T10:30:00Z",
+      "end": "2025-08-08T15:30:00Z"
+    },
+    "source_diversity": {
+      "community_sources": 3,
+      "academic_sources": 1,
+      "youth_networks": 1,
+      "traditional_councils": 1
+    },
+    "privacy_compliance": {
+      "anonymized": true,
+      "aggregated": true,
+      "differential_privacy": true,
+      "no_personal_data": true
+    }
+  }
+}

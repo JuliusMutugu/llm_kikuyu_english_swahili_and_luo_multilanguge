@@ -1,0 +1,10 @@
+# Lightweight API requirements for free hosting (under 4GB)
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+requests>=2.31.0
+python-multipart>=0.0.6
+
+# Minimal dependencies - no heavy ML libraries for fallback mode
+# torch and transformers are too large for free hosting
+# The API will use template responses instead
