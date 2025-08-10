@@ -153,9 +153,22 @@ async def quick_luo_test():
 if __name__ == "__main__":
     import sys
     
-    if len(sys.argv) > 1 and sys.argv[1] == 'test':
+    # Support different modes
+    mode = sys.argv[1] if len(sys.argv) > 1 else 'full'
+    
+    if mode == 'test':
         # Quick test mode
+        print("🧪 Testing Luo dictionary learning...")
         asyncio.run(quick_luo_test())
+    elif mode == 'quick':
+        # Quick learning mode for Docker initialization
+        print("🚀 Quick Luo learning mode (Docker initialization)")
+        print("📚 Learning essential Luo words for immediate use...")
+        asyncio.run(learn_luo_dictionary())
     else:
         # Full learning mode
+        print("🎯 Starting comprehensive Luo dictionary learning from Glosbe...")
+        print(f"📚 Learning essential Luo vocabulary")
+        print("🌐 Source: https://glosbe.com/en/luo")
+        print()
         asyncio.run(learn_luo_dictionary())

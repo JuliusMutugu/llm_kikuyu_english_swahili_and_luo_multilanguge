@@ -10,6 +10,7 @@ services:
     volumes:
       - ./models:/app/models
       - ./checkpoints:/app/checkpoints
+      - learning_data:/app/learning_data
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
@@ -27,4 +28,33 @@ services:
       - trilingual-api
     environment:
       - API_URL=http://trilingual-api:8001
+      - PYTHONPATH=/app
+    volumes:
+      - learning_data:/app/learning_data
+      - analytics_data:/app/analytics_data
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Optional: Dictionary Learning Service (runs once to initialize)
+  dictionary-learner:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    command: ["python", "learn_luo_dictionary.py"]
+    depends_on:
+      - streamlit-ui
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - learning_data:/app/learning_data
+    restart: "no"
+    profiles:
+      - learning
+
+volumes:
+  learning_data:
+  analytics_data:

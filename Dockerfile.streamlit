@@ -1,4 +1,4 @@
-# Dockerfile for Streamlit UI
+# Dockerfile for Enhanced Streamlit UI with Learning Features
 FROM python:3.10-slim
 
 # Set working directory
@@ -15,9 +15,20 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy Streamlit app
+# Copy all application files (including learning modules)
 COPY streamlit_app.py .
+COPY federated_learning.py .
+COPY online_dictionary_learner.py .
+COPY learn_luo_dictionary.py .
+COPY learning_analytics.py .
+COPY docker_startup.sh .
 COPY .streamlit/ .streamlit/
+
+# Make startup script executable
+RUN chmod +x docker_startup.sh
+
+# Create directories for learning data
+RUN mkdir -p /app/learning_data /app/analytics_data
 
 # Expose port
 EXPOSE 8501
@@ -26,5 +37,6 @@ EXPOSE 8501
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8501/_stcore/health || exit 1
 
-# Run Streamlit
+# Run Streamlit with enhanced learning
+ENTRYPOINT ["./docker_startup.sh"]
 CMD ["streamlit", "run", "streamlit_app.py", "--server.address", "0.0.0.0", "--server.port", "8501"]

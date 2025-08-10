@@ -1,0 +1,682 @@
+{
+  "federated_updates": [
+    {
+      "source_id": "dictionary_e418bab9",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "chiemo",
+          "target_translations": [
+            "come and eat food \n\nbi icham chiemo"
+          ],
+          "frequency_category": "high",
+          "definition_available": false,
+          "examples_count": 2
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "chiemo"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "high",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481615",
+      "privacy_hash": "76209f4e1b058852",
+      "quality_score": 0.97,
+      "cultural_context": "luo_to_en"
+    },
+    {
+      "source_id": "dictionary_2ff67760",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "pi",
+          "target_translations": [
+            "pi\n\nnoun"
+          ],
+          "frequency_category": "high",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "pi"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "high",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481642",
+      "privacy_hash": "98e2de7ca78c0155",
+      "quality_score": 1.0,
+      "cultural_context": "luo_to_en"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Help",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Help"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481654",
+      "privacy_hash": "6ed49003f420b41d",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Help",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Help"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481668",
+      "privacy_hash": "6ed49003f420b41d",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Glossary",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Glossary"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481675",
+      "privacy_hash": "41ce3c98e1c56659",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Glossary",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Glossary"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481682",
+      "privacy_hash": "41ce3c98e1c56659",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Search",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Search"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481688",
+      "privacy_hash": "bbf5ea054f9c46d0",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Appearance",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Appearance"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481699",
+      "privacy_hash": "cd5c8a6df9e9324f",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Donations",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Donations"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481705",
+      "privacy_hash": "7218ebcd9f33a783",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Donations",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Donations"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481711",
+      "privacy_hash": "7218ebcd9f33a783",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Donations",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Donations"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481717",
+      "privacy_hash": "7218ebcd9f33a783",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Donations",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Donations"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481723",
+      "privacy_hash": "7218ebcd9f33a783",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Contributions",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Contributions"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481729",
+      "privacy_hash": "84f9a924650d2775",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Contributions",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Contributions"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481735",
+      "privacy_hash": "84f9a924650d2775",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Talk",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Talk"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481745",
+      "privacy_hash": "b6ecfbd5537a935e",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Talk",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Talk"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481751",
+      "privacy_hash": "b6ecfbd5537a935e",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Category",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Category"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481756",
+      "privacy_hash": "c8976b3e8f3ab18f",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Eesti",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Eesti"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481762",
+      "privacy_hash": "1bbfa271b81d56ab",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Eesti",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Eesti"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481768",
+      "privacy_hash": "1bbfa271b81d56ab",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Galego",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Galego"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481774",
+      "privacy_hash": "ec8419ea122f0727",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Galego",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Galego"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481779",
+      "privacy_hash": "ec8419ea122f0727",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    },
+    {
+      "source_id": "dictionary_a32bbbb1",
+      "language": "luo",
+      "update_type": "vocabulary_expansion",
+      "data": {
+        "vocabulary_pattern": {
+          "source_word": "Hrvatski",
+          "target_translations": [],
+          "frequency_category": "medium",
+          "definition_available": false,
+          "examples_count": 0
+        },
+        "language_patterns": {
+          "primary_language": "luo",
+          "translation_language": "en",
+          "cultural_expressions": [
+            "Hrvatski"
+          ]
+        },
+        "performance_indicators": {
+          "vocabulary_expansion": true,
+          "quality_category": "low",
+          "cultural_relevance": 0.8
+        }
+      },
+      "timestamp": "2025-08-10T04:57:12.481787",
+      "privacy_hash": "af028934c5641579",
+      "quality_score": 0.6,
+      "cultural_context": "luo_vocabulary"
+    }
+  ],
+  "metadata": {
+    "source_type": "online_dictionary",
+    "extraction_time": "2025-08-10T04:57:12.481559",
+    "total_entries": 22,
+    "languages_covered": [
+      "en",
+      "luo"
+    ],
+    "quality_range": {
+      "min": 0.6,
+      "max": 1.0,
+      "average": 0.6349999999999999
+    }
+  }
+}
